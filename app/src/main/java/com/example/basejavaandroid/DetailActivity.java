@@ -26,7 +26,9 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding,DetailVie
        binding.btnBooking.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-
+                  Intent intent = new Intent(DetailActivity.this,BookingActivity.class);
+                  intent.putExtra("film",film);
+                  startActivity(intent);
            }
        });
     }

@@ -1,26 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-         <variable
-             name="viewmodel"
-             type="com.example.basejavaandroid.BookingViewmodel" />
+        <variable
+            name="viewmodel"
+            type="com.example.basejavaandroid.BookingViewmodel" />
+        <variable
+            name="bookinginfo"
+            type="com.example.basejavaandroid.Booking" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#000000"
+        tools:context=".view.BookingActivity">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
+            app:tint="#FFFFFF"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
-            android:id="@+id/tvBooking"
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Booking Fragment"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="Session selection"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toStartOf="@+id/tvTimeLeft"
+            app:layout_constraintStart_toEndOf="@+id/ivBack"
+            app:layout_constraintTop_toTopOf="@+id/ivBack" />
+
+        <TextView
+            android:id="@+id/tvPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@{bookinginfo.nameRap}"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/ivBack"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/tvTimeLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="6:48"
+            android:textColor="#F44336"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/tvInfor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{bookinginfo.nameScreen + '-' + bookinginfo.date + ' ' + bookinginfo.rangeTime}"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/tvPlace"
+            app:layout_constraintTop_toBottomOf="@+id/tvPlace" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSeat"
+            setAdapter="@{viewmodel.seatAdapter}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnFinishPayment"
+            app:layout_constraintTop_toBottomOf="@+id/tvStandar"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <Button
+            android:id="@+id/btnFinishPayment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="Finish Payment"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#8BC34A"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNamefilm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@+id/rvSeat"
+            app:layout_constraintStart_toStartOf="@+id/btnFinishPayment" />
+
+        <TextView
+            android:id="@+id/tvTotalmoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total money"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvPay"
+            app:layout_constraintEnd_toEndOf="@+id/tvPay" />
+
+        <TextView
+            android:id="@+id/tvPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0đ"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/rvSeat"
+            app:layout_constraintEnd_toEndOf="@+id/btnFinishPayment" />
+
+        <TextView
+            android:id="@+id/tvSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Selected seat"
+            android:textColor="#8E8888"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tvInfor" />
+
+        <TextView
+            android:id="@+id/tvStandar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Standar seat"
+            android:textColor="#8E8888"
+            app:layout_constraintStart_toStartOf="@+id/tvSelected"
+            app:layout_constraintTop_toBottomOf="@id/tvSelected" />
+
+        <ImageView
+            android:id="@+id/ivStandar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStandar"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/tvStandar"
+            app:srcCompat="@drawable/ic_baseline_event_seat_24"
+            app:tint="#FFFFFF"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSelected"
+            app:layout_constraintEnd_toStartOf="@+id/tvSelected"
+            app:layout_constraintTop_toTopOf="@+id/tvSelected"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_baseline_event_seat_24"
+            app:tint="#FFC107"
+            tools:ignore="VectorDrawableCompat" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

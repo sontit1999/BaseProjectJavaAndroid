@@ -34,8 +34,8 @@ public abstract class BaseActivity<B extends ViewDataBinding,VM extends BaseView
         viewmodel = ViewModelProviders.of(this).get(getViewModel());
         binding = DataBindingUtil.setContentView(this,getLayoutId());
         setBindingViewmodel();
-        initEvent();
         getData();
+        initEvent();
     }
 
     protected abstract void getData();
