@@ -30,7 +30,6 @@
             app:hado_radius_selected="50dp"
             app:hado_radius_unselected="40dp"
             app:hado_color_unselected="#FFF"
-            app:hado_distance="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
