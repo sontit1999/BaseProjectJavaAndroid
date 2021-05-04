@@ -24,18 +24,64 @@ public abstract class BaseAdapter<T , B extends ViewDataBinding> extends Recycle
         notifyDataSetChanged();
     }
     public void removeItem(T item){
-        int index = dataList.indexOf(item);
-        dataList.remove(index);
-        notifyItemRemoved(index);
+        if(dataList!=null && dataList.size()>0){
+            int index = dataList.indexOf(item);
+            dataList.remove(index);
+            notifyItemRemoved(index);
+        }
+    }
+    public void insertItemTop(T item) {
+        int position = 0;
+        if (dataList != null) {
+            dataList.add(position, item);
+            notifyItemInserted(position);
+        }
+    }
+    public void insertItemBottom(T item) {
+        if (dataList != null) {
+            int position = dataList.size();
+            if (item != null) {
+                dataList.add(position, item);
+                notifyItemInserted(position);
+            }
+        }
     }
     public void updateItem(int pos,T item){
-        dataList.set(pos,item);
-        notifyItemChanged(pos);
+        if (item != null) {
+            List<T> list = getList();
+
+            int itemPosition = list.indexOf(item);
+
+            if (itemPosition >= 0 && itemPosition < list.size()) {
+                list.set(itemPosition, item);
+            } else {
+                list.add(item);
+            }
+            notifyItemChanged(pos);
+        }
+
     }
     public void addItems(T item){
         dataList.add(item);
         notifyItemInserted(dataList.size()-1);
     }
+    public void addItemsAtPostition(int pos,T item){
+        if (dataList != null) {
+            if (item != null) {
+                dataList.add(pos, item);
+                notifyItemInserted(pos);
+            }
+        }
+    }
+    public void clear() {
+        if (dataList != null) {
+            if (dataList.size() > 0) {
+                dataList.clear();
+            }
+            notifyDataSetChanged();
+        }
+    }
+
     public ArrayList<T> getList(){
         return (ArrayList<T>) dataList;
     }

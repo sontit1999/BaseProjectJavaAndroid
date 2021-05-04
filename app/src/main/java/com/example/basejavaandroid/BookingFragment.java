@@ -2,6 +2,7 @@ package com.example.basejavaandroid;
 
 import android.os.Build;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -98,9 +99,9 @@ public class BookingFragment extends BaseFragment<FragBookingBinding,BookingView
            @RequiresApi(api = Build.VERSION_CODES.N)
            @Override
            public void onClick(View v) {
-               Toast.makeText(getActivity(),"Đặt vé thành công rồi nha!",Toast.LENGTH_LONG).show();
+               /*Toast.makeText(getActivity(),"Đặt vé thành công rồi nha!",Toast.LENGTH_LONG).show();
                List<Seat> arrSeatChoose = viewmodel.arrSeat.getValue().stream().filter(s->s.isSelected()).collect(Collectors.toList());
-               getActivity().finish();
+               getActivity().finish();*/
            }
        });
     }
@@ -113,5 +114,29 @@ public class BookingFragment extends BaseFragment<FragBookingBinding,BookingView
     @Override
     protected int getLayoutId() {
         return R.layout.frag_booking;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("sondz","on pause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("sondz","on stop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("sondz","on destroy");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("sondz","on detack");
     }
 }

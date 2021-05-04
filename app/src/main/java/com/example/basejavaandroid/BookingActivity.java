@@ -1,15 +1,18 @@
 package com.example.basejavaandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.basejavaandroid.base.BaseActivity;
 import com.example.basejavaandroid.databinding.ActivityBookingBinding;
 
 public class BookingActivity extends BaseActivity<ActivityBookingBinding,BookingActViewmodel> {
     BookingFragment bookingFragment ;
+    FragDemo fragDemo ;
     Film film;
     @Override
     protected void getData() {
@@ -28,6 +31,7 @@ public class BookingActivity extends BaseActivity<ActivityBookingBinding,Booking
     @Override
     protected void initEvent() {
           loadFragment(bookingFragment,R.id.containerFrame);
+
     }
 
     @Override

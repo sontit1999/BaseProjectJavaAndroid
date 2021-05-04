@@ -3,6 +3,7 @@ package com.example.basejavaandroid.base;
 import android.app.Activity;
 
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +11,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Message;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,9 +31,14 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.basejavaandroid.R;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class BaseActivity<B extends ViewDataBinding,VM extends BaseViewmodel> extends AppCompatActivity {
     protected B binding;
     protected VM viewmodel;
+    public ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,4 +97,62 @@ public abstract class BaseActivity<B extends ViewDataBinding,VM extends BaseView
                 .addToBackStack(null) // name can be null
                 .commit();
      }
+    public void makeFullScreen() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setMessage("Loading....");
+        }
+
+        mProgressDialog.show();
+    }
+    public void setupTouchUIToDismissKeyboard(View view) {
+        setupTouchUIToDismissKeyboard(view, (v, event) -> {
+            hideSoftKeyboard(BaseActivity.this);
+            return false;
+        }, -1);
+    }
+
+    public static void setupTouchUIToDismissKeyboard(View view, View.OnTouchListener onTouchListener, final Integer... exceptIDs) {
+        List<Integer> ids = new ArrayList<>();
+        if (exceptIDs != null)
+            ids = Arrays.asList(exceptIDs);
+
+        //Set up touch listener for non-text box views to hide keyboard.
+        if(!(view instanceof EditText)) {
+
+            if (!ids.isEmpty() && ids.contains(view.getId()))
+            {
+                return;
+            }
+
+            view.setOnTouchListener(onTouchListener);
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+
+                View innerView = ((ViewGroup) view).getChildAt(i);
+
+                setupTouchUIToDismissKeyboard(innerView, onTouchListener, exceptIDs);
+            }
+        }
+    }
+
+    /** Hide the Soft Keyboard.*/
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE);
+
+        if (inputMethodManager == null)
+            return;
+
+        if (activity.getCurrentFocus() != null && activity.getCurrentFocus().getWindowToken() != null)
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
 }
