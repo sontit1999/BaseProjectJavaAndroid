@@ -1,7 +1,10 @@
-package com.example.basejavaandroid;
+ package com.example.basejavaandroid;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.Observer;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.basejavaandroid.base.BaseActivity;
@@ -24,7 +28,40 @@ import java.util.List;
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewmodel> {
     public static final String FILM_KEY = "film";
     private static final String TAG = "sondz";
+    public static final String ACTION_BROADCAST ="sondz";
+    public static final String KEY_DATA ="keys";
     private boolean isLoading = false;
+    private BroadcastReceiver broadcastReceiver;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Toast.makeText(context, "On Recieve broadcase !", Toast.LENGTH_SHORT).show();
+                switch (intent.getAction()){
+                    case ACTION_BROADCAST :
+                        Film data = (Film) intent.getSerializableExtra(KEY_DATA);
+                        binding.tvResult.setText("Data gửi từ detail Activity : " + data.getName() );
+
+                        break;
+                    default:
+                        binding.tvResult.setText("Data chưa lấy được " );
+                        break;
+                }
+            }
+        };
+        IntentFilter filter = new IntentFilter(ACTION_BROADCAST);
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("sonit","Unregister broadcast");
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+    }
 
     @Override
     protected void getData() {
@@ -131,6 +168,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewmode
     @Override
     protected void setBindingViewmodel() {
          binding.setViewmodel(viewmodel);
+
     }
 
     @Override

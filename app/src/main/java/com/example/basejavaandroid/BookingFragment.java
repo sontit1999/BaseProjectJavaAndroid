@@ -1,5 +1,6 @@
 package com.example.basejavaandroid;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -99,9 +100,8 @@ public class BookingFragment extends BaseFragment<FragBookingBinding,BookingView
            @RequiresApi(api = Build.VERSION_CODES.N)
            @Override
            public void onClick(View v) {
-               /*Toast.makeText(getActivity(),"Đặt vé thành công rồi nha!",Toast.LENGTH_LONG).show();
-               List<Seat> arrSeatChoose = viewmodel.arrSeat.getValue().stream().filter(s->s.isSelected()).collect(Collectors.toList());
-               getActivity().finish();*/
+               Intent intent = new Intent(getContext(),CustomActivity.class);
+               startActivity(intent);
            }
        });
     }

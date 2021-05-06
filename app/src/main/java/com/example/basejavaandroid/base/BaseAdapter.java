@@ -24,10 +24,15 @@ public abstract class BaseAdapter<T , B extends ViewDataBinding> extends Recycle
         notifyDataSetChanged();
     }
     public void removeItem(T item){
+
+
         if(dataList!=null && dataList.size()>0){
             int index = dataList.indexOf(item);
-            dataList.remove(index);
-            notifyItemRemoved(index);
+            if(index>0){
+                dataList.remove(index);
+                notifyItemRemoved(index);
+            }
+
         }
     }
     public void insertItemTop(T item) {

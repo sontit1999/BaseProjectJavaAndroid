@@ -15,7 +15,7 @@ import androidx.annotation.RequiresApi;
 import androidx.viewpager.widget.ViewPager;
 
 public class IndicatorViewMadeBySonTit extends View implements IndicatorInterface,ViewPager.OnPageChangeListener {
-    private static final long DEFAULT_ANIMATE_DURATION = 200;
+    private static final long DEFAULT_ANIMATE_DURATION = 3000;
 
     private static final int DEFAULT_RADIUS_SELECTED = 20;
 
@@ -177,6 +177,8 @@ public class IndicatorViewMadeBySonTit extends View implements IndicatorInterfac
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         // đã có kích thước chính xác của view bằng cách getwwidth() và getheight()
         // tính toán vị trí các phần tử con để chuẩn bị vẽ
+        int w = getWidth();
+        int h = getHeight();
         super.onLayout(changed, left, top, right, bottom);
         float yCenter = getHeight() / 2;
 

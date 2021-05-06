@@ -3,6 +3,8 @@ package com.example.basejavaandroid;
 import android.content.Intent;
 import android.view.View;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.example.basejavaandroid.base.BaseActivity;
 import com.example.basejavaandroid.databinding.ActivityDetailBinding;
 
@@ -26,6 +28,9 @@ public class DetailActivity extends BaseActivity<ActivityDetailBinding,DetailVie
        binding.btnBooking.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+                  Intent intentBroadcast = new Intent(MainActivity.ACTION_BROADCAST);
+                  intentBroadcast.putExtra(MainActivity.KEY_DATA,film);
+                  LocalBroadcastManager.getInstance(DetailActivity.this).sendBroadcast(intentBroadcast);
                   Intent intent = new Intent(DetailActivity.this,BookingActivity.class);
                   intent.putExtra("film",film);
                   startActivity(intent);

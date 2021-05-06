@@ -9,4 +9,7 @@
 
         <attr name="hado_distance" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="CustomChartBMIResult">
+
+    </declare-styleable>
 </resources>
