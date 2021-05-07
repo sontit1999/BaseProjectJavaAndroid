@@ -10,6 +10,7 @@
         <attr name="hado_distance" format="dimension" />
     </declare-styleable>
     <declare-styleable name="CustomChartBMIResult">
-
+        <attr name="colorTriangle" format="color" ></attr>
+        <attr name="sizeTextScore" format="dimension" ></attr>
     </declare-styleable>
 </resources>

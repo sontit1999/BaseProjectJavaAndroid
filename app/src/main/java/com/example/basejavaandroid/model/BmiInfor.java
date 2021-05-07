@@ -9,7 +9,8 @@ public class BmiInfor implements Serializable {
     private float scoreBMI;
 
     public float getScoreBMI() {
-        return w/(h*h);
+        float hMet = h/100;
+        return w/(hMet*hMet);
     }
     public BmiInfor(float w, float h, int posGendle) {
         this.w = w;

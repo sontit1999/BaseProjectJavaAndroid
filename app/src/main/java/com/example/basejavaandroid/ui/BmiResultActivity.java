@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.basejavaandroid.R;
@@ -27,6 +28,9 @@ public class BmiResultActivity extends BaseActivity<ActivityBmiResultBinding,Bmi
                  binding.spinerGender.setSelection(bmiInfor.getPosGendle());
                  binding.edtHeight.setText(bmiInfor.getH() + "");
                  binding.edtWeight.setText(bmiInfor.getW() + "");
+                 float scoreBMI = bmiInfor.getScoreBMI();
+                 Log.d("sondz",scoreBMI + "");
+                 binding.chartBMI.setScroreBMI(scoreBMI);
              }
          }
     }
