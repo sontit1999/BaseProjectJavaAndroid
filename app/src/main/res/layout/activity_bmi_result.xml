@@ -106,15 +106,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:enabled="false"
-            android:textColor="#494747"
             android:layout_marginRight="8dp"
             android:background="@drawable/bg_gender"
             android:ems="10"
+            android:enabled="false"
             android:inputType="textPersonName"
             android:padding="10dp"
+            android:textColor="#494747"
             app:layout_constraintEnd_toStartOf="@id/textView4"
             app:layout_constraintRight_toLeftOf="@id/textView4"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -169,11 +169,12 @@
         <com.example.basejavaandroid.customview.CustomChartBMIResult
             android:id="@+id/chartBMI"
             android:layout_width="0dp"
-            android:layout_height="2dp"
-            app:sizeTextScore="15sp"
+            android:layout_height="1dp"
             app:layout_constraintEnd_toEndOf="@+id/textView4"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/edtWeight"
-            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3"
+            app:sizeTextScore="14sp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

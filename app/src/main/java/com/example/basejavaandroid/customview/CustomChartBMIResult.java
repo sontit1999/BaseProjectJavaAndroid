@@ -38,6 +38,7 @@ public class CustomChartBMIResult extends View {
     }
     List<Rect>  listRect = new ArrayList<>();
     float[] listBeakScore = new float[]{18.5f,25,30};
+    String[] listDescribe = new String[]{"Thiếu Cân","Bình Thường","Thừa Cân","Béo Phì"};
     int[] listColor = new int[]{Color.parseColor("#138ce3"),Color.parseColor("#1eb37d"),Color.parseColor("#ffbf19"),Color.parseColor("#d83e3e")};
     public CustomChartBMIResult(Context context) {
         super(context);
@@ -91,9 +92,9 @@ public class CustomChartBMIResult extends View {
         }
 
         if (heightMode == MeasureSpec.EXACTLY) {
-            heightView = heightSize*3 ;
+            heightView = heightSize*5 ;
         } else if (widthMode == MeasureSpec.AT_MOST) {
-            heightView = heightSize*3 ;
+            heightView = heightSize*5 ;
         } else {
             heightView = 0;
         }
@@ -109,9 +110,9 @@ public class CustomChartBMIResult extends View {
         float constant =  (float) 2/3;
 
         for(int i=0;i<4;i++){
-           float topRect = (float)heightView/3;
-           float bottomRect = (float)heightView/3 + (float)heightView/3;
-           listRect.add(new Rect(i*lengthRectangle-1, (int)topRect,(i+1)*lengthRectangle, (int)bottomRect));
+            float topRect = (float)((heightView*2)/5);
+            float bottomRect =(float)((heightView*2)/5) + (float)heightView/5;
+            listRect.add(new Rect(i*lengthRectangle-1, (int)topRect,(i+1)*lengthRectangle, (int)bottomRect));
         }
     }
 
@@ -119,18 +120,53 @@ public class CustomChartBMIResult extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         for(int i=0;i<listRect.size();i++){
-            drawRectangleWithColor(canvas, listColor[i],listRect.get(i));
+            if(i==0){
+                drawRectangleWithColorAndBoderRadius(canvas,listColor[i],listRect.get(i),true);
+            }else if(i==listRect.size()-1){
+                drawRectangleWithColorAndBoderRadius(canvas,listColor[i],listRect.get(i),false);
+            }else{
+                drawRectangleWithColor(canvas, listColor[i],listRect.get(i));
+            }
+
+
         }
-        drawTriangleWithColor(canvas,Color.DKGRAY,widthView/4,heightView/6,heightView/6);
+        drawTriangleWithColor(canvas,Color.DKGRAY,widthView/4,(heightView/5) + heightView/8, (int) (heightView/8));
+        drawBeakPoint(canvas);
+    }
+    public void drawRectangleWithColorAndBoderRadius(Canvas canvas,int color, Rect rect,boolean isLeft){
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(color);
+        //draw rectange boder radius
+        float boderRadius = (rect.bottom - rect.top)/2;
+        float[] cornersLeft = new float[]{
+                boderRadius, boderRadius,        // Top left radius in px
+                0, 0,        // Top right radius in px
+                0, 0,          // Bottom right radius in px
+                boderRadius, boderRadius           // Bottom left radius in px
+        };
+        float[] cornersRight = new float[]{
+                0, 0,        // Top left radius in px
+                boderRadius, boderRadius,        // Top right radius in px
+                boderRadius, boderRadius,          // Bottom right radius in px
+                0, 0           // Bottom left radius in px
+        };
+        final Path path = new Path();
+        if(isLeft){
+            path.addRoundRect(new RectF(rect.left,rect.top,rect.right,rect.bottom), cornersLeft, Path.Direction.CW);
+        }else{
+            path.addRoundRect(new RectF(rect.left,rect.top,rect.right,rect.bottom), cornersRight, Path.Direction.CW);
+        }
+        canvas.drawPath(path, mPaint);
     }
     public void drawRectangleWithColor(Canvas canvas,int color, Rect rect){
         // fill
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(color);
+
         canvas.drawRect(rect, mPaint);
 
     }
-    public void drawText(Canvas canvas,int x,int y,String text ){
+    public void drawTextCenterPostittionX(Canvas canvas,int x,int y,String text ){
         Rect bounds = new Rect();
         mTextPaint.getTextBounds(text, 0, text.length(), bounds);
         int width = bounds.width();
@@ -140,6 +176,64 @@ public class CustomChartBMIResult extends View {
                 TextUtils.TruncateAt.END);
         canvas.drawText(str, 0, str.length(), x - width/2, y, mTextPaint);
 
+    }
+    public void drawTextCenterPostittionXCustomSize(Canvas canvas,int x,int y,String text ,float sizeText){
+        float curentSize = mTextPaint.getTextSize();
+        mTextPaint.setTextSize(sizeText);
+        Rect bounds = new Rect();
+        mTextPaint.getTextBounds(text, 0, text.length(), bounds);
+        int width = bounds.width();
+        int height = bounds.height();
+        CharSequence str = TextUtils.ellipsize(text,
+                (TextPaint) mTextPaint, getWidth(),
+                TextUtils.TruncateAt.END);
+        canvas.drawText(str, 0, str.length(), x - width/2, y-height/4, mTextPaint);
+        mTextPaint.setTextSize(curentSize);
+    }
+    public void drawCicleAndTextPosWithColor(Canvas canvas, int x,int y,int color){
+        int curentColor = mPaint.getColor();
+        mPaint.setColor(color);
+        int radiusCircle = heightView/22;
+        canvas.drawCircle(x+radiusCircle,y+radiusCircle,radiusCircle,mPaint);
+        mPaint.setColor(curentColor);
+
+    }
+    public void drawTextCenterPostittionCustom(Canvas canvas,int x,int y,String text ,float sizeText,int colorText){
+        float curentSize = mTextPaint.getTextSize();
+        int currentColor = mTextPaint.getColor();
+        mTextPaint.setTextSize(sizeText);
+        mTextPaint.setColor(colorText);
+        mTextPaint.setFakeBoldText(true);
+        Rect bounds = new Rect();
+        mTextPaint.getTextBounds(text, 0, text.length(), bounds);
+        int width = bounds.width();
+        int height = bounds.height();
+
+        CharSequence str = TextUtils.ellipsize(text,
+                (TextPaint) mTextPaint, getWidth(),
+                TextUtils.TruncateAt.END);
+        canvas.drawText(str, 0, str.length(), x - width/2, y+height, mTextPaint);
+        mTextPaint.setTextSize(curentSize);
+        mTextPaint.setColor(currentColor);
+        mTextPaint.setFakeBoldText(false);
+    }
+    public void drawBeakPoint(Canvas canvas){
+        Rect bounds = new Rect();
+        mTextPaint.getTextBounds(String.valueOf(listBeakScore[0]), 0, String.valueOf(listBeakScore[0]).length(), bounds);
+        int height = bounds.height();
+
+        int y = (heightView/5) * 3 + height + height/2;
+        int d = widthView/4;
+        int distanmin = widthView/8;
+        for(int i=1;i<4;i++){
+            drawTextCenterPostittionX(canvas,i*d,y,String.valueOf(listBeakScore[i-1]));
+        }
+        int index = 1;
+        for(int i=1;i<=4;i++){
+            drawTextCenterPostittionXCustomSize(canvas,index*distanmin,y+heightView/10+height,listDescribe[i-1],sizeText*0.6f);
+            index += 2;
+            drawCicleAndTextPosWithColor(canvas,(i-1)*d,y+heightView/10,listColor[i-1]);
+        }
     }
     public void drawTriangleWithColor(Canvas canvas, int color, int x, int y, int width) {
 
@@ -173,9 +267,9 @@ public class CustomChartBMIResult extends View {
         path.close();
         mPaint.setColor(colorTriangle);
         canvas.drawPath(path, mPaint);
-
-        for(int i=1;i<4;i++){
-            drawText(canvas,i*d*2,y*6,String.valueOf(listBeakScore[i-1]));
-        }
+        // draw Score BMI
+        String scoreString = String.format("%.02f", scroreBMI).replace(',','.');
+        drawTextCenterPostittionCustom(canvas,XtriAngler,0, scoreString,sizeText*2.5f,colorTriangle);
     }
+
 }
