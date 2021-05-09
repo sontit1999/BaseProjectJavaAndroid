@@ -2,6 +2,12 @@
     <string name="app_name">BaseJavaAndroid</string>
     <string name="notification_channel_id">notificationFirebase</string>
     <string name="msg_token_fmt">tokenNotifi</string>
+    <string name="whatBMI">BMI là gì ?</string>
+    <string name="bmi_detail">Chỉ số BMI là chỉ số cân nặng (hay chỉ số khối cơ thể) viết tắt của từ Body Mass Index - được dùng để đánh giá mức độ gầy hay béo của một người. Chỉ số này do nhà khoa học người Bỉ Adolphe Quetelet đưa ra năm 1832.
+\n\n Chỉ số BMI được sử dụng như một công cụ tầm soát để xác định trọng lượng cơ thể bạn. Từ các số liệu mà nó tính toán, bạn sẽ biết được mình đang thừa cân hay thiếu cân, hay là một người có body chuẩn.\n\nĐây là phương pháp đơn giản nhất và chính xác nhất được sử dụng phổ biến trên thế giớ, giúp xác định trọng lượng tối ưu cho cả nam và nữ ở độ tuổi từ 20-65, trừ phụ nữ mang thai và cho con bú, vận động viên</string>
+    <string name="bmi_step_detail">Để tính BMI, bạn sẽ được yêu cầu cho biết về chiều cao và cân nặng, dựa vào công thức có sẵn để tính ra chỉ số khối cơ thể mình. \n Chỉ số BMI thường nằm trong khoảng từ 15/60. Tuy nhiên theo WHO thì chỉ số BMI chuẩn nhất là nằm trong khoảng từ 18.5 đến 24.9</string>
+    <string name="muoitamphay5"><![CDATA[<18.5]]></string>
+    <string name="hisory">Lịch sử</string>
     <string-array name="gender_array">
         <item>Nam</item>
         <item>Nữ</item>

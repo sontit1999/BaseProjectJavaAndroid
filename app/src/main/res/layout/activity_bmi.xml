@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+       <variable
+           name="viewmodel"
+           type="com.example.basejavaandroid.ui.BMiViewmodel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.BmiActivity">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></include>
+
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tvBMI"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/whatBMI"
+                    android:textColor="#302E2E"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+                    app:layout_constraintStart_toEndOf="@+id/ivBack"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/bmi_detail"
+                    android:textColor="#302E2E"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvBMI" />
+                <TextView
+                    android:id="@+id/tvHowToBMI"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/whatBMI"
+                    android:textColor="#302E2E"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+                    app:layout_constraintStart_toEndOf="@+id/ivBack"
+                    app:layout_constraintTop_toBottomOf="@id/tvDetail" />
+                <TextView
+                    android:id="@+id/tvHowToBMIDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/bmi_step_detail"
+                    android:textColor="#302E2E"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHowToBMI" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutCTBmi"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHowToBMIDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivIngredient"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/bmi_ct"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <TableLayout
+                    android:id="@+id/tableLayoutDetail"
+                    android:layout_width="match_parent"
+                    android:layout_centerInParent="true"
+                    android:stretchColumns="*"
+                    app:layout_constraintTop_toBottomOf="@id/layoutCTBmi"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_height="wrap_content">
+                    <TableRow >
+                        <TextView
+                            android:id="@+id/tvChiSoBMI"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_span="2"
+                            android:gravity="left"
+                            android:text="Chỉ số BMI"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvPhanLoai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Phân Loại"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:gravity="left"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="15dp">
+                        <TextView
+                            android:id="@+id/tvNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/muoitamphay5"
+                            android:gravity="left"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:textSize="14sp"
+                            />
+                        <TextView
+                            android:id="@+id/tvPhanLoai1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Thiếu cân"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:gravity="left"
+                            android:textSize="14sp"
+                            />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/tvNumber2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="18.5 - 24.9"
+                            android:gravity="left"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:textSize="14sp"
+                            />
+                        <TextView
+                            android:id="@+id/tvPhanLoai2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bình thường"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:gravity="left"
+                            android:textSize="14sp"
+                            />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/tvNumber3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="25 - 29.9"
+                            android:gravity="left"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:textSize="14sp"
+                            />
+                        <TextView
+                            android:id="@+id/tvPhanLoai3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Thừa cân"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:gravity="left"
+                            android:textSize="14sp"
+                            />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/tvNumber4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30 - 34.9"
+                            android:gravity="left"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:textSize="14sp"
+                            />
+                        <TextView
+                            android:id="@+id/tvPhanLoai4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Béo phì cấp độ I"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:gravity="left"
+                            android:textSize="14sp"
+                            />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/tvNumber5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="35 - 39.9"
+                            android:gravity="left"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:textSize="14sp"
+                            />
+                        <TextView
+                            android:id="@+id/tvPhanLoai5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Béo phì cấp độ II"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:gravity="left"
+                            android:textSize="14sp"
+                            />
+                    </TableRow>
+                    <TableRow android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/tvNumber6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=">40"
+                            android:gravity="left"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:textSize="14sp"
+                            />
+                        <TextView
+                            android:id="@+id/tvPhanLoai6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Béo phì cấp độ III"
+                            android:textColor="#5C5858"
+                            android:layout_span="2"
+                            android:gravity="left"
+                            android:textSize="14sp"
+                            />
+                    </TableRow>
+                </TableLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tableLayoutDetail">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5"></androidx.constraintlayout.widget.Guideline>
+
+                    <Button
+                        android:id="@+id/btnCalucateBMI"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/bg_button_tinhbmi"
+                        android:text="Bảng tính BMI"
+                        android:textAllCaps="true"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+                    <Button
+                        android:id="@+id/btnHistoryBMI"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/bg_back_bmi"
+                        android:text="Lịch Sử"
+                        android:textAllCaps="true"
+                        android:textColor="#EA3A76"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

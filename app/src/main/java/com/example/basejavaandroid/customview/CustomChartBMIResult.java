@@ -90,14 +90,8 @@ public class CustomChartBMIResult extends View {
         } else {
             widthView = 0;
         }
+        heightView = (int) (widthView * 0.0569196f*5);
 
-        if (heightMode == MeasureSpec.EXACTLY) {
-            heightView = heightSize*5 ;
-        } else if (widthMode == MeasureSpec.AT_MOST) {
-            heightView = heightSize*5 ;
-        } else {
-            heightView = 0;
-        }
         setMeasuredDimension(widthSize,heightView);
     }
 
@@ -230,7 +224,7 @@ public class CustomChartBMIResult extends View {
         }
         int index = 1;
         for(int i=1;i<=4;i++){
-            drawTextCenterPostittionXCustomSize(canvas,index*distanmin,y+heightView/10+height,listDescribe[i-1],sizeText*0.6f);
+            drawTextCenterPostittionXCustomSize(canvas,index*distanmin,y+heightView/10+height,listDescribe[i-1],sizeText*0.7f);
             index += 2;
             drawCicleAndTextPosWithColor(canvas,(i-1)*d,y+heightView/10,listColor[i-1]);
         }

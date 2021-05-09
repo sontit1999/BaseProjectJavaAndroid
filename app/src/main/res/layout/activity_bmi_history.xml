@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+           <variable
+               name="viewmdoel"
+               type="com.example.basejavaandroid.ui.BmiHistoryViewmodel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.BmiHistoryActivity">
+
+        <include
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/include"
+            layout="@layout/toolbar"></include>
+
+       <ScrollView
+           android:id="@+id/scrollview"
+           android:layout_width="match_parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/include"
+           android:layout_height="wrap_content">
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:padding="20dp"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+               <ImageView
+                   android:id="@+id/chartHistory"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/chart_bmi_history"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent" />
+               <TextView
+                   android:id="@+id/tvHistory"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:text="@string/hisory"
+                   android:textColor="#302E2E"
+                   android:textSize="14sp"
+                   android:textStyle="bold"
+                   android:layout_marginTop="10dp"
+                   app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+                   app:layout_constraintStart_toEndOf="@+id/ivBack"
+                   app:layout_constraintTop_toBottomOf="@id/chartHistory" />
+               <androidx.constraintlayout.widget.ConstraintLayout
+                   app:layout_constraintTop_toBottomOf="@id/tvHistory"
+                   app:layout_constraintLeft_toLeftOf="parent"
+                   android:layout_marginTop="10dp"
+                   app:layout_constraintRight_toRightOf="parent"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+                   <androidx.recyclerview.widget.RecyclerView
+                       android:id="@+id/rvHistory"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:paddingBottom="20dp"
+                       setAdapter="@{viewmdoel.bmiHistoryAdapter}"
+                       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                       tools:listitem="@layout/item_row_history"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toTopOf="parent" />
+               </androidx.constraintlayout.widget.ConstraintLayout>
+           </androidx.constraintlayout.widget.ConstraintLayout>
+       </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

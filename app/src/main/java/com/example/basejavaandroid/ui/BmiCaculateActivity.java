@@ -38,6 +38,12 @@ public class BmiCaculateActivity extends BaseActivity<ActivityBmiCaculateBinding
 
     @Override
     protected void initEvent() {
+        binding.include.ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         binding.btnTinhBMI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -64,6 +64,10 @@ public abstract class BaseActivity<B extends ViewDataBinding,VM extends BaseView
         intent.putExtra(key,bundle);
         startActivity(intent);
     }
+    public void gotoActivityNoData(Class<?> cls){
+        Intent intent = new Intent(this,cls);
+        startActivity(intent);
+    }
     //Kiểm tra trạng thái internet
     public Boolean isNetworkConnected() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

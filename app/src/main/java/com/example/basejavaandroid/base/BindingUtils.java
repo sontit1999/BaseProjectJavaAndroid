@@ -1,6 +1,11 @@
 package com.example.basejavaandroid.base;
 
+import android.graphics.BlendMode;
+import android.graphics.BlendModeColorFilter;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -8,6 +13,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.basejavaandroid.R;
 
 public class BindingUtils {
     @BindingAdapter({ "setAdapter"})
@@ -39,5 +45,30 @@ public class BindingUtils {
                 .centerCrop()
                 .into(view);
 
+    }
+    @BindingAdapter({"bind:setBGcolor"})
+    public static void setBGcolor(View view, float scroreBMI) {
+
+        int[] listColor = new int[]{Color.parseColor("#138ce3"),Color.parseColor("#1eb37d"),Color.parseColor("#ffbf19"),Color.parseColor("#d83e3e")};
+        int color = listColor[0];
+        if(scroreBMI<18.5){
+
+            color = listColor[0];
+        }
+        if(scroreBMI>=18.5 && scroreBMI < 25){
+
+            color = listColor[1];
+        }
+        if(scroreBMI>=25 && scroreBMI <=30){
+            color = listColor[2];
+        }
+        if(scroreBMI>30){
+            color = listColor[3];
+        }
+        Drawable drawable = view.getContext().getResources().getDrawable(R.drawable.bg_circle);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            drawable.setTint(color);
+        }
+        view.setBackground(drawable);
     }
 }
