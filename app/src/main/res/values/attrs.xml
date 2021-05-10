@@ -13,4 +13,7 @@
         <attr name="colorTriangle" format="color" ></attr>
         <attr name="sizeTextScore" format="dimension" ></attr>
     </declare-styleable>
+    <declare-styleable name="CustomChartHistoryBMI">
+        <attr name="TextsizeScore" format="dimension" ></attr>
+    </declare-styleable>
 </resources>

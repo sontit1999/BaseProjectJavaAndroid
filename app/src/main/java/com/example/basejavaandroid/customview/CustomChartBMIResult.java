@@ -102,7 +102,7 @@ public class CustomChartBMIResult extends View {
         heightView = getHeight();
         lengthRectangle = widthView/4;
         float constant =  (float) 2/3;
-
+        listRect.clear();
         for(int i=0;i<4;i++){
             float topRect = (float)((heightView*2)/5);
             float bottomRect =(float)((heightView*2)/5) + (float)heightView/5;
@@ -114,11 +114,12 @@ public class CustomChartBMIResult extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         for(int i=0;i<listRect.size();i++){
+//            drawRectangleWithColor(canvas, listColor[i],listRect.get(i));
             if(i==0){
                 drawRectangleWithColorAndBoderRadius(canvas,listColor[i],listRect.get(i),true);
             }else if(i==listRect.size()-1){
                 drawRectangleWithColorAndBoderRadius(canvas,listColor[i],listRect.get(i),false);
-            }else{
+            }else {
                 drawRectangleWithColor(canvas, listColor[i],listRect.get(i));
             }
 

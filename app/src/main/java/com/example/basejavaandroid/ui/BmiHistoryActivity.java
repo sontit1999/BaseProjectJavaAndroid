@@ -18,11 +18,13 @@ public class BmiHistoryActivity extends BaseActivity<ActivityBmiHistoryBinding,B
 
     @Override
     protected void getData() {
+
         binding.include.tvTitle.setText("Lịch sử BMI");
         viewmodel.getArrHistory().observe(this, new Observer<List<BmiHistory>>() {
             @Override
             public void onChanged(List<BmiHistory> bmiHistories) {
                 viewmodel.bmiHistoryAdapter.setList(bmiHistories);
+                binding.chartHistory.setListHistory(bmiHistories);
             }
         });
     }

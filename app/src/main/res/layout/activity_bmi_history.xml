@@ -32,7 +32,7 @@
                android:padding="20dp"
                android:layout_width="match_parent"
                android:layout_height="match_parent">
-               <ImageView
+               <com.example.basejavaandroid.customview.CustomChartHistoryBMI
                    android:id="@+id/chartHistory"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
