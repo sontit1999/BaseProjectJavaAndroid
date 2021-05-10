@@ -102,7 +102,7 @@ public class CustomChartHistoryBMI extends View {
         widhView = getWidth();
         heightView = getHeight();
         dx = widhView/14;
-        dy = heightView/7;
+        dy = heightView/8;
     }
 
     @Override
@@ -119,18 +119,21 @@ public class CustomChartHistoryBMI extends View {
 
     private void drawTextScoreBMIX(Canvas canvas) {
         float heightMax = 30;
-        int dy = (int) (heightView/7);
         int numberBreakpoint = 7;
         int index = 0;
 
         for(int i=0;i<numberBreakpoint;i++){
             if(i==0){
-                drawTextCenterPostittion(canvas,(int)dx/2 ,(int)(heightView-(dy*i)-dy/4f),String.valueOf(index),true,false);
-                drawLine(canvas, (int) dx,(int)(heightView-(dy*i)-dy/4f), (int) widhView,(int)(heightView-(dy*i)-dy/4f));
-                yOrigin  = (int)(heightView-(dy*6)-dy/4f);
-            }else{
-                drawTextCenterPostittion(canvas,(int)dx/2,(int)(heightView-(dy*i)-dy/4f),String.valueOf(index),false,true);
-                drawLine(canvas, (int) dx,(int)(heightView-(dy*i)-dy/4f), (int) widhView,(int)(heightView-(dy*i)-dy/4f));
+                drawTextCenterPostittion(canvas,(int)dx/2 ,(int)(heightView-(dy*(i+1))),String.valueOf(index),false,false);
+                drawLine(canvas, (int) dx,(int)(heightView-(dy*(i+1))), (int) widhView,(int)(heightView-(dy*(i+1))));
+
+            }else if(i==numberBreakpoint-1){
+                drawTextCenterPostittion(canvas,(int)dx/2 ,(int)(heightView-(dy*(i+1))),String.valueOf(index),false,true);
+                drawLine(canvas, (int) dx,(int)(heightView-(dy*(i+1))), (int) widhView,(int)(heightView-(dy*(i+1))));
+            }
+            else{
+                drawTextCenterPostittion(canvas,(int)dx/2,(int)(heightView-(dy*(i+1))),String.valueOf(index),false,true);
+                drawLine(canvas, (int) dx,(int)(heightView-(dy*(i+1))), (int) widhView,(int)(heightView-(dy*(i+1))));
             }
             index+=5;
         }
@@ -140,10 +143,12 @@ public class CustomChartHistoryBMI extends View {
         Rect bounds = new Rect();
         mTextPaint.getTextBounds("aaa", 0, 3, bounds);
         int height = bounds.height();
+       // int yTime = (int) (heightView-height);
         int yTime = (int) (heightView-height);
-        for(int i=0;i<listHistory.size();i++){
-            drawRectangleWithColor(canvas,Color.RED,(int) ((2*(i+1)-1)*dx),(int)(yTime+dy/4f),listHistory.get(i).getScore());
-            drawTextCenterPostittion(canvas,(int) ((2*(i+1)-1)*dx),yTime,listHistory.get(i).getTime().split(" ")[1],false,true);
+        int yOrigin = (int) ( heightView - dy);
+        for(int i=1;i<=listHistory.size();i++){
+           // drawRectangleWithColor(canvas,Color.RED,(int) ((2*i-1)*dx),yOrigin,listHistory.get(i-1).getScore());
+            drawTextCenterPostittion(canvas,(int) ((2*i-1)*dx),yTime,listHistory.get(i-1).getTime().split(" ")[1],false,false);
         }
 
     }
@@ -198,6 +203,8 @@ public class CustomChartHistoryBMI extends View {
             canvas.drawText(str, 0, str.length(), x + width/2, y, mTextPaint);
         }else if(isCenterY){
             canvas.drawText(str, 0, str.length(), x, y+height/2, mTextPaint);
+        }else{
+            canvas.drawText(str, 0, str.length(), x , y, mTextPaint);
         }
     }
     public void drawText(Canvas canvas,int x,int y,String text ){
