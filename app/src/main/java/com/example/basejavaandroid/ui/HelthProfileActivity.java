@@ -38,6 +38,12 @@ public class HelthProfileActivity extends BaseActivity<ActivityHelthProfileBindi
                      gotoActivityNoData(BmiActivity.class);
                  }
              });
+             binding.include.profileImage.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     gotoActivityNoData(MyProfileHelthActivity.class);
+                 }
+             });
     }
 
     @Override
