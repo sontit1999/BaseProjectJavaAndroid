@@ -38,6 +38,7 @@ public class BmiCaculateActivity extends BaseActivity<ActivityBmiCaculateBinding
 
     @Override
     protected void initEvent() {
+        binding.include.profileImage.setVisibility(View.INVISIBLE);
         binding.include.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

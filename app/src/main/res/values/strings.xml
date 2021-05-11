@@ -8,6 +8,22 @@
     <string name="bmi_step_detail">Để tính BMI, bạn sẽ được yêu cầu cho biết về chiều cao và cân nặng, dựa vào công thức có sẵn để tính ra chỉ số khối cơ thể mình. \n Chỉ số BMI thường nằm trong khoảng từ 15/60. Tuy nhiên theo WHO thì chỉ số BMI chuẩn nhất là nằm trong khoảng từ 18.5 đến 24.9</string>
     <string name="muoitamphay5"><![CDATA[<18.5]]></string>
     <string name="hisory">Lịch sử</string>
+    <string name="welcomHelth">Chào mừng bạn đến với Sức khỏe của Aeonmaill LifeStyle</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in nunc ut metus ullamcorper posuere condimentum sit amet mi. Aenean ut purus volutpat, pellentesque eros rutrum, ultrices lectus</string>
+    <string name="tittleHSSK">Hồ sơ sức khỏe</string>
+    <string name="weightHeight">1m68, 100kg</string>
+    <string name="time">12:00 12/12/2021</string>
+    <string name="tittleBMI">Chỉ số BMI</string>
+    <string name="tittleCalo">Đếm bước và Calorie</string>
+    <string name="caloAndStep">7234/7500 bước, 234 Kcal</string>
+    <string name="myInfor">Thông tin cá nhân</string>
+    <string name="name">Tên</string>
+    <string name="sontit">Trần Văn Sơn</string>
+    <string name="weight">Cân nặng</string>
+    <string name="height">Chiều cao</string>
+    <string name="tagets">Mục tiêu</string>
+    <string name="step">Số bước mỗi ngày</string>
+    <string name="bmi">BMI</string>
     <string-array name="gender_array">
         <item>Nam</item>
         <item>Nữ</item>

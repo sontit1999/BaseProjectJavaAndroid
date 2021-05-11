@@ -10,6 +10,7 @@ import android.view.View;
 import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.adapter.GenderAdapter;
 import com.example.basejavaandroid.base.BaseActivity;
+import com.example.basejavaandroid.base.UtilsFunction;
 import com.example.basejavaandroid.databinding.ActivityBmiResultBinding;
 import com.example.basejavaandroid.model.BmiInfor;
 
@@ -26,8 +27,8 @@ public class BmiResultActivity extends BaseActivity<ActivityBmiResultBinding,Bmi
              bmiInfor = (BmiInfor) intent.getSerializableExtra(BmiCaculateActivity.KEY_BMI);
              if(bmiInfor!=null){
                  binding.spinerGender.setSelection(bmiInfor.getPosGendle());
-                 binding.edtHeight.setText(bmiInfor.getH() + "");
-                 binding.edtWeight.setText(bmiInfor.getW() + "");
+                 binding.edtHeight.setText(UtilsFunction.ConvertFloatToString(bmiInfor.getH()));
+                 binding.edtWeight.setText(UtilsFunction.ConvertFloatToString(bmiInfor.getW()));
                  float scoreBMI = bmiInfor.getScoreBMI();
                  Log.d("sondz",scoreBMI + "");
                  binding.chartBMI.setScroreBMI(scoreBMI);
@@ -47,6 +48,7 @@ public class BmiResultActivity extends BaseActivity<ActivityBmiResultBinding,Bmi
 
     @Override
     protected void initEvent() {
+        binding.include.profileImage.setVisibility(View.INVISIBLE);
         binding.btnBackTinhBMI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

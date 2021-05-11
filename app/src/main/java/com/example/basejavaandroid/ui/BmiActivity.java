@@ -25,6 +25,7 @@ public class BmiActivity extends BaseActivity<ActivityBmiBinding,BMiViewmodel> {
                 finish();
             }
         });
+        binding.include.profileImage.setVisibility(View.INVISIBLE);
         binding.btnCalucateBMI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -34,6 +34,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="@{String.valueOf(bmihistory.score)}"
+            bind:displayFloat="@{bmihistory.score}"
             android:textColor="#252323"
             android:textSize="14sp"
             android:textStyle="bold"

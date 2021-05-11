@@ -36,7 +36,7 @@
                    android:id="@+id/chartHistory"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:src="@drawable/chart_bmi_history"
+                   app:TextsizeScore="7sp"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toTopOf="parent" />
@@ -49,8 +49,7 @@
                    android:textSize="14sp"
                    android:textStyle="bold"
                    android:layout_marginTop="10dp"
-                   app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-                   app:layout_constraintStart_toEndOf="@+id/ivBack"
+                   app:layout_constraintStart_toStartOf="@+id/chartHistory"
                    app:layout_constraintTop_toBottomOf="@id/chartHistory" />
                <androidx.constraintlayout.widget.ConstraintLayout
                    app:layout_constraintTop_toBottomOf="@id/tvHistory"

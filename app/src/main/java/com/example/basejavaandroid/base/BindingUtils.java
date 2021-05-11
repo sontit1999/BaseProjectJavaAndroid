@@ -8,12 +8,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.basejavaandroid.R;
+import com.example.basejavaandroid.customview.TestView;
 
 public class BindingUtils {
     @BindingAdapter({ "setAdapter"})
@@ -36,6 +38,10 @@ public class BindingUtils {
                 .with(view.getContext())
                 .load(imageUrl)
                 .into(view);
+    }
+    @BindingAdapter({"bind:displayFloat"})
+    public static void displayFloat(TextView view, float score) {
+       view.setText(UtilsFunction.ConvertFloatToString(score));
     }
     @BindingAdapter({"bind:imageAssest"})
     public static void loadImageAssestToview(ImageView view, String imageAssest) {

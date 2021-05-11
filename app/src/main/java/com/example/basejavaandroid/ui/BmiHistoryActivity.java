@@ -31,6 +31,7 @@ public class BmiHistoryActivity extends BaseActivity<ActivityBmiHistoryBinding,B
 
     @Override
     protected void initEvent() {
+        binding.include.profileImage.setVisibility(View.INVISIBLE);
         binding.include.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+         <variable
+             name="viewmodel"
+             type="com.example.basejavaandroid.ui.MyProfileHelthViewmodel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.MyProfileHelthActivity">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/include"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_cover"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+            <View
+                android:id="@+id/viewLayerToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBGcover"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:padding="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+                app:tint="@color/colorTitleTvToolbar" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Bảng tính BMI"
+                android:textColor="@color/colorTitleTvToolbar"
+                android:textSize="@dimen/sizeTitle"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivBack"
+                app:layout_constraintTop_toTopOf="@+id/ivBack" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include"
+            android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <View
+                    android:id="@+id/viewCover"
+                    android:background="@drawable/bg_cover"
+                    app:layout_constraintDimensionRatio="1:0.5"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"/>
+
+                <View
+                    android:id="@+id/viewLayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@color/colorBGcover"
+                    app:layout_constraintDimensionRatio="1:0.25"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline1"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.65"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/avatar"
+                    app:layout_constraintBottom_toBottomOf="@id/viewCover"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
+                    app:layout_constraintTop_toTopOf="@+id/viewCover" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="100dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewCover"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvMyInfor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/myInfor"
+                        android:textColor="#302E2E"
+                        android:textSize="@dimen/sizeTitle"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/name"
+                        android:textColor="#302E2E"
+                        android:textSize="@dimen/sizeContent"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvMyInfor" />
+
+                    <EditText
+                        android:id="@+id/edtName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_gender"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:maxLines="1"
+                        android:textSize="@dimen/sizeContent"
+                        android:text="@string/sontit"
+                        android:textColor="#494747"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvName" />
+                    <TextView
+                        android:id="@+id/tvGender"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Giới tính"
+                        android:textColor="#494747"
+                        android:textSize="@dimen/sizeContent"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/edtName" />
+                    <Spinner
+                        android:id="@+id/spinerGender"
+                        android:layout_width="0dp"
+                        android:background="@android:color/transparent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutWidthHeight"
+                        android:layout_width="match_parent"
+                        app:layout_constraintTop_toBottomOf="@id/spinerGender"
+                        android:layout_height="wrap_content">
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineVertical1"
+                            android:layout_width="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:id="@+id/tvWeight"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/weight"
+                            android:textColor="#494747"
+                            android:textSize="@dimen/sizeContent"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@id/guidelineVertical1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="kg"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/edtWeight"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineVertical1"
+                            app:layout_constraintTop_toTopOf="@+id/edtWeight" />
+
+
+                        <EditText
+                            android:id="@+id/edtHeight"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/bg_gender"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:text="178"
+                            android:textColor="#494747"
+                            android:textSize="@dimen/sizeContent"
+                            app:layout_constraintEnd_toStartOf="@+id/textCm"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+                            app:layout_constraintTop_toBottomOf="@id/tvWeight" />
+                        <TextView
+                            android:id="@+id/tvHeight"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/height"
+                            android:textColor="#494747"
+                            android:textSize="@dimen/sizeContent"
+                            android:textStyle="bold"
+                           app:layout_constraintLeft_toRightOf="@id/guidelineVertical1"
+
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textCm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="cm"
+                            android:textSize="@dimen/sizeContent"
+                            app:layout_constraintBottom_toBottomOf="@+id/edtWeight"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/edtWeight" />
+
+
+                        <EditText
+                            android:id="@+id/edtWeight"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="60"
+                            android:maxLines="1"
+                            android:textSize="@dimen/sizeContent"
+                            android:textColor="#494747"
+                            android:padding="10dp"
+                            android:background="@drawable/bg_gender"
+                            android:inputType="numberDecimal"
+                            app:layout_constraintTop_toBottomOf="@id/tvWeight"
+                            app:layout_constraintEnd_toStartOf="@+id/textView3"
+                            app:layout_constraintStart_toStartOf="@+id/tvWeight"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/tvTarget"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/tagets"
+                        android:textColor="#494747"
+                        android:textSize="@dimen/sizeContent"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layoutWidthHeight" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutBMI"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tvTarget"
+                        tools:layout_editor_absoluteX="15dp">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineVertical2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+
+                        <TextView
+                            android:id="@+id/tvScoreBMI"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/bmi"
+                            android:textColor="#494747"
+                            android:textSize="@dimen/sizeContent"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@id/guidelineVertical2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/edtStep"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/bg_gender"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:text="178"
+                            android:textColor="#494747"
+                            android:textSize="@dimen/sizeContent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineVertical2"
+                            app:layout_constraintTop_toBottomOf="@id/tvScoreBMI" />
+
+                        <TextView
+                            android:id="@+id/tvStep"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/step"
+                            android:textColor="#494747"
+                            android:textSize="@dimen/sizeContent"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toRightOf="@id/guidelineVertical2"
+
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/edtBMI"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/bg_gender"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:text="60"
+                            android:textColor="#494747"
+                            android:textSize="@dimen/sizeContent"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvScoreBMI" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <Button
+                        android:id="@+id/btnTinhBMI"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_button_tinhbmi"
+                        android:text="Cập nhật"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layoutBMI" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

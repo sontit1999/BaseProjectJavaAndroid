@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.model.BmiHistory;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,7 +111,7 @@ public class CustomChartHistoryBMI extends View {
         super.onDraw(canvas);
         drawTextScoreBMIX(canvas);
         drawTextTime(canvas);
-
+        drawBeakPoint(canvas);
     }
 
     private void drawRectangleScore(Canvas canvas,int bottomX,int bottomY,float scoreBMI) {
@@ -123,16 +124,19 @@ public class CustomChartHistoryBMI extends View {
         int index = 0;
 
         for(int i=0;i<numberBreakpoint;i++){
+            Rect bounds = new Rect();
+            mTextPaint.getTextBounds(String.valueOf(index), 0, String.valueOf(index).length(), bounds);
+            int width = bounds.width();
             if(i==0){
-                drawTextCenterPostittion(canvas,(int)dx/2 ,(int)(heightView-(dy*(i+1))),String.valueOf(index),false,false);
+                drawTextCenterPostittion(canvas,(int)(dx/2-width/2f) ,(int)(heightView-(dy*(i+1))),String.valueOf(index),true,false);
                 drawLine(canvas, (int) dx,(int)(heightView-(dy*(i+1))), (int) widhView,(int)(heightView-(dy*(i+1))));
 
             }else if(i==numberBreakpoint-1){
-                drawTextCenterPostittion(canvas,(int)dx/2 ,(int)(heightView-(dy*(i+1))),String.valueOf(index),false,true);
+                drawTextCenterPostittion(canvas,(int)(dx/2-width/2f) ,(int)(heightView-(dy*(i+1))),String.valueOf(index),true,true);
                 drawLine(canvas, (int) dx,(int)(heightView-(dy*(i+1))), (int) widhView,(int)(heightView-(dy*(i+1))));
             }
             else{
-                drawTextCenterPostittion(canvas,(int)dx/2,(int)(heightView-(dy*(i+1))),String.valueOf(index),false,true);
+                drawTextCenterPostittion(canvas,(int)(dx/2-width/2f),(int)(heightView-(dy*(i+1))),String.valueOf(index),true,true);
                 drawLine(canvas, (int) dx,(int)(heightView-(dy*(i+1))), (int) widhView,(int)(heightView-(dy*(i+1))));
             }
             index+=5;
@@ -143,16 +147,46 @@ public class CustomChartHistoryBMI extends View {
         Rect bounds = new Rect();
         mTextPaint.getTextBounds("aaa", 0, 3, bounds);
         int height = bounds.height();
-       // int yTime = (int) (heightView-height);
-        int yTime = (int) (heightView-height);
+        int yTime = (int) (heightView-dy/2-height/2f);
         int yOrigin = (int) ( heightView - dy);
         for(int i=1;i<=listHistory.size();i++){
-           // drawRectangleWithColor(canvas,Color.RED,(int) ((2*i-1)*dx),yOrigin,listHistory.get(i-1).getScore());
+            mTextPaint.getTextBounds(String.valueOf(listHistory.get(i-1).getScore()), 0, String.valueOf(listHistory.get(i-1).getScore()).length(), bounds);
+            int widht = bounds.width();
+            drawRectangleWithColor(canvas,Color.RED,(int) ((2*i-1)*dx),listHistory.get(i-1).getScore());
             drawTextCenterPostittion(canvas,(int) ((2*i-1)*dx),yTime,listHistory.get(i-1).getTime().split(" ")[1],false,false);
+            drawTextCenterPostittionCustomSize(canvas,mTextPaint,(int)((2*i-1)*dx + dx/2f),(int)(heightView-dy-dy/2f),ConvertFloatToString(listHistory.get(i-1).getScore()),textSize*1.3f,true,Color.WHITE);
         }
 
     }
-    public void drawRectangleWithColor(Canvas canvas,int color, int bottomX,int bottomY,float scroreBMI){
+    public String ConvertFloatToString(float num){
+        int phannguyen = (int)num;
+        float phandu = num - phannguyen;
+        if(phandu==0){
+            return String.valueOf(phannguyen);
+        }
+        return String.valueOf(num);
+    }
+    public void drawBeakPoint(Canvas canvas){
+        int yDescribe = (int) (heightView-dy/4f);
+        int d = (int) (widhView/4f);
+        int index = 1;
+        Rect bounds = new Rect();
+        mTextPaint.getTextBounds("Thiếu cân", 0, 1, bounds);
+        int height = bounds.height();
+        for(int i=0;i<4;i++){
+            drawCiclePosWithColor(canvas, (int) ((i)*d+(dy/2f)),yDescribe,listColor[i]);
+            drawTextCenterPostittion(canvas,(int) ((i)*d+(dy/2f))+ (int) (dy/5), (int) (yDescribe+height/2f),listDescribe[i],false,false);
+        }
+    }
+    public void drawCiclePosWithColor(Canvas canvas, int x,int y,int color){
+        int curentColor = mPaint.getColor();
+        mPaint.setColor(color);
+        int radiusCircle = (int) (dy/10);
+        canvas.drawCircle(x,y,radiusCircle,mPaint);
+        mPaint.setColor(curentColor);
+
+    }
+    public void drawRectangleWithColor(Canvas canvas,int color, int left,float scroreBMI){
         int curentColor = mPaintDrawRectangeScore.getColor();
         int colorRec = listColor[0];
         if(scroreBMI<18.5){
@@ -171,16 +205,20 @@ public class CustomChartHistoryBMI extends View {
         // fill
         mPaintDrawRectangeScore.setStyle(Paint.Style.FILL);
         mPaintDrawRectangeScore.setColor(colorRec);
-        Rect rect = new Rect((int)(bottomX),(int)((heightView - heightRectangle)),(int)(bottomX+dx),(int)(bottomY-dy/2f));
+        Rect rect = new Rect((int)(left),(int)((heightView - dy- heightRectangle)),(int)(left+dx),(int)(heightView - dy));
         canvas.drawRect(rect, mPaintDrawRectangeScore);
         mPaintDrawRectangeScore.setColor(curentColor);
-
     }
-    public void drawTextCenterPostittionCustomSize(Canvas canvas,Paint mTextPaint,int x,int y,String text ,float sizeText){
+    public void drawTextCenterPostittionCustomSize(Canvas canvas,Paint mTextPaint,int x,int y,String text ,float sizeText,boolean isBold,int colorText){
         float curentSize = mTextPaint.getTextSize();
         mTextPaint.setTextSize(sizeText);
+        int currentColor = mTextPaint.getColor();
+        mTextPaint.setColor(colorText);
         Rect bounds = new Rect();
         mTextPaint.getTextBounds(text, 0, text.length(), bounds);
+        if(isBold){
+            mTextPaint.setFakeBoldText(true);
+        }
         int width = bounds.width();
         int height = bounds.height();
       /*  CharSequence str = TextUtils.ellipsize(text,
@@ -188,6 +226,7 @@ public class CustomChartHistoryBMI extends View {
                 TextUtils.TruncateAt.END);*/
         canvas.drawText(text,x - width/2, y+height/2, mTextPaint);
         mTextPaint.setTextSize(curentSize);
+        mTextPaint.setColor(currentColor);
     }
     public void drawTextCenterPostittion(Canvas canvas,int x,int y,String text,boolean isCenterX,boolean isCenterY){
         Rect bounds = new Rect();
@@ -207,10 +246,56 @@ public class CustomChartHistoryBMI extends View {
             canvas.drawText(str, 0, str.length(), x , y, mTextPaint);
         }
     }
+    public void drawTextCenterPostittionCusTomsize(Canvas canvas,int x,int y,String text,boolean isCenterX,boolean isCenterY){
+        Rect bounds = new Rect();
+        mTextPaint.getTextBounds(text, 0, text.length(), bounds);
+        int width = bounds.width();
+        int height = bounds.height();
+        CharSequence str = TextUtils.ellipsize(text,
+                (TextPaint) mTextPaint, getWidth(),
+                TextUtils.TruncateAt.END);
+        if(isCenterX && isCenterY){
+            canvas.drawText(str, 0, str.length(), x + width/2, y+height/2, mTextPaint);
+        }else if(isCenterX){
+            canvas.drawText(str, 0, str.length(), x + width/2, y, mTextPaint);
+        }else if(isCenterY){
+            canvas.drawText(str, 0, str.length(), x, y+height/2, mTextPaint);
+        }else{
+            canvas.drawText(str, 0, str.length(), x , y, mTextPaint);
+        }
+    }
+    public void drawTextCenterPostittionCustomColor(Canvas canvas,int x,int y,int colorText,String text,boolean isCenterX,boolean isCenterY,boolean isBold){
+        Rect bounds = new Rect();
+        mTextPaint.getTextBounds(text, 0, text.length(), bounds);
+        int currentCOlor = mTextPaint.getColor();
+        mTextPaint.setColor(colorText);
+        if(isBold){
+            mTextPaint.setFakeBoldText(true);
+        }
+        int width = bounds.width();
+        int height = bounds.height();
+        CharSequence str = TextUtils.ellipsize(text,
+                (TextPaint) mTextPaint, getWidth(),
+                TextUtils.TruncateAt.END);
+        if(isCenterX && isCenterY){
+            canvas.drawText(str, 0, str.length(), x + width/2, y+height/2, mTextPaint);
+        }else if(isCenterX){
+            canvas.drawText(str, 0, str.length(), x + width/2, y, mTextPaint);
+        }else if(isCenterY){
+            canvas.drawText(str, 0, str.length(), x, y+height/2, mTextPaint);
+        }else{
+            canvas.drawText(str, 0, str.length(), x , y, mTextPaint);
+        }
+        //reset paint
+        mTextPaint.setColor(currentCOlor);
+        mTextPaint.setFakeBoldText(false);
+    }
     public void drawText(Canvas canvas,int x,int y,String text ){
         canvas.drawText(text,x,y,mTextPaint);
     }
     public void drawLine(Canvas canvas,int startX,int startY,int endX,int endY){
+        mPaint.setAlpha((int)(0.5f*255));
         canvas.drawLine(startX,startY,endX,endY,mPaint);
+        mPaint.setAlpha(255);
     }
 }
