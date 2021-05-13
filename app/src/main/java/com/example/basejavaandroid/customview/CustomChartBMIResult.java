@@ -1,5 +1,6 @@
 package com.example.basejavaandroid.customview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -53,7 +54,7 @@ public class CustomChartBMIResult extends View {
         super(context, attrs);
         scroreBMI = DEFAUL_BMI;
         colorTriangle = DEFAUL_COLORTRIANGLE;
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomChartBMIResult);
+        @SuppressLint("Recycle") TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomChartBMIResult);
         this.sizeText = typedArray.getDimensionPixelSize(R.styleable.CustomChartBMIResult_sizeTextScore, DEFAULT_TEXT_SIZE);
         initPaint();
     }
@@ -63,7 +64,7 @@ public class CustomChartBMIResult extends View {
 
         scroreBMI = DEFAUL_BMI;
         colorTriangle = DEFAUL_COLORTRIANGLE;
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomChartBMIResult);
+        @SuppressLint("Recycle") TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomChartBMIResult);
         this.sizeText = typedArray.getDimensionPixelOffset(R.styleable.CustomChartBMIResult_sizeTextScore, DEFAULT_TEXT_SIZE);
         initPaint();
     }
@@ -80,9 +81,7 @@ public class CustomChartBMIResult extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         if (widthMode == MeasureSpec.EXACTLY) {
             widthView = widthSize;
         } else if (widthMode == MeasureSpec.AT_MOST) {
@@ -95,13 +94,13 @@ public class CustomChartBMIResult extends View {
         setMeasuredDimension(widthSize,heightView);
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         widthView = getWidth();
         heightView = getHeight();
         lengthRectangle = widthView/4;
-        float constant =  (float) 2/3;
         listRect.clear();
         for(int i=0;i<4;i++){
             float topRect = (float)((heightView*2)/5);
@@ -125,14 +124,14 @@ public class CustomChartBMIResult extends View {
 
 
         }
-        drawTriangleWithColor(canvas,Color.DKGRAY,widthView/4,(heightView/5) + heightView/8, (int) (heightView/8));
+        drawTriangleWithColor(canvas,Color.DKGRAY, (heightView/5) + heightView/8, (int) (heightView/8));
         drawBeakPoint(canvas);
     }
     public void drawRectangleWithColorAndBoderRadius(Canvas canvas,int color, Rect rect,boolean isLeft){
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(color);
         //draw rectange boder radius
-        float boderRadius = (rect.bottom - rect.top)/2;
+        float boderRadius = (rect.bottom - rect.top)/2f;
         float[] cornersLeft = new float[]{
                 boderRadius, boderRadius,        // Top left radius in px
                 0, 0,        // Top right radius in px
@@ -169,7 +168,7 @@ public class CustomChartBMIResult extends View {
         CharSequence str = TextUtils.ellipsize(text,
                 (TextPaint) mTextPaint, getWidth(),
                 TextUtils.TruncateAt.END);
-        canvas.drawText(str, 0, str.length(), x - width/2, y, mTextPaint);
+        canvas.drawText(str, 0, str.length(), x - width/2f, y, mTextPaint);
 
     }
     public void drawTextCenterPostittionXCustomSize(Canvas canvas,int x,int y,String text ,float sizeText){
@@ -182,7 +181,7 @@ public class CustomChartBMIResult extends View {
         CharSequence str = TextUtils.ellipsize(text,
                 (TextPaint) mTextPaint, getWidth(),
                 TextUtils.TruncateAt.END);
-        canvas.drawText(str, 0, str.length(), x - width/2, y-height/4, mTextPaint);
+        canvas.drawText(str, 0, str.length(), x - width/2f, y-height/4f, mTextPaint);
         mTextPaint.setTextSize(curentSize);
     }
     public void drawCicleAndTextPosWithColor(Canvas canvas, int x,int y,int color){
@@ -207,7 +206,7 @@ public class CustomChartBMIResult extends View {
         CharSequence str = TextUtils.ellipsize(text,
                 (TextPaint) mTextPaint, getWidth(),
                 TextUtils.TruncateAt.END);
-        canvas.drawText(str, 0, str.length(), x - width/2, y+height, mTextPaint);
+        canvas.drawText(str, 0, str.length(), x - width/2f, y+height, mTextPaint);
         mTextPaint.setTextSize(curentSize);
         mTextPaint.setColor(currentColor);
         mTextPaint.setFakeBoldText(false);
@@ -230,12 +229,11 @@ public class CustomChartBMIResult extends View {
             drawCicleAndTextPosWithColor(canvas,(i-1)*d,y+heightView/10,listColor[i-1]);
         }
     }
-    public void drawTriangleWithColor(Canvas canvas, int color, int x, int y, int width) {
+    public void drawTriangleWithColor(Canvas canvas, int color, int y, int width) {
 
         int d = widthView/8;
         int XtriAngler = d;
         if(scroreBMI<18.5){
-            XtriAngler = d;
             colorTriangle = listColor[0];
         }
         if(scroreBMI>=18.5 && scroreBMI < 25){
@@ -263,7 +261,7 @@ public class CustomChartBMIResult extends View {
         mPaint.setColor(colorTriangle);
         canvas.drawPath(path, mPaint);
         // draw Score BMI
-        String scoreString = String.format("%.02f", scroreBMI).replace(',','.');
+        @SuppressLint("DefaultLocale") String scoreString = String.format("%.02f", scroreBMI).replace(',','.');
         drawTextCenterPostittionCustom(canvas,XtriAngler,0, scoreString,sizeText*2.5f,colorTriangle);
     }
 
