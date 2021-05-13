@@ -7,10 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorTitleProfileHelth">#b31e8d</color>
+    <color name="colorTitleProfileHelth">#B31E8D</color>
     <color name="bg_profileHelth">#ffeefc</color>
     <color name="colorTvTime">#828282</color>
     <color name="colorBGcover">#C3B31E8D</color>
     <color name="colorTitleTvToolbar">#FFFFFF</color>
     <color name="colorTitleHomeHelth">#2D2D2D</color>
+    <color name="colorBGHomeHelth">#FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="TitleNameHomehelth">#474747</color>
 </resources>

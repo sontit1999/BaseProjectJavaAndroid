@@ -2,7 +2,9 @@ package com.example.basejavaandroid.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.adapter.GenderAdapter;
 import com.example.basejavaandroid.base.BaseActivity;
@@ -27,11 +29,19 @@ public class MyProfileHelthActivity extends BaseActivity<ActivityMyProfileHelthB
         // Specify the layout to use when the list of choices appears
         // Apply the adapter to the spinner
         binding.spinerGender.setAdapter(genderAdapter);
+
+        // load default avatar
+       // Glide.with(this).load(R.drawable.avatar).into(binding.profileImage);
     }
 
     @Override
     protected void initEvent() {
-
+       binding.ivBack.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               finish();
+           }
+       });
     }
 
     @Override

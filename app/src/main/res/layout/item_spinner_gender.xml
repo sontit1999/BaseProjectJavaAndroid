@@ -4,17 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingHorizontal="10dp"
+    android:padding="@dimen/paddingEdtName"
     android:background="@drawable/bg_gender"
     android:layout_height="wrap_content">
-
     <TextView
         android:id="@+id/tvGender"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Nam"
-        android:textColor="#494747"
-        android:padding="10dp"
+        android:textColor="@color/colorTitleHomeHelth"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +20,11 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvGender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvGender"
-        app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24" />
+        app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24"
+        tools:ignore="VectorDrawableCompat" />
 </androidx.constraintlayout.widget.ConstraintLayout>

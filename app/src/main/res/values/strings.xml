@@ -24,6 +24,9 @@
     <string name="tagets">Mục tiêu</string>
     <string name="step">Số bước mỗi ngày</string>
     <string name="bmi">BMI</string>
+    <string name="bangtinhBMI">Bảng tính BMI</string>
+    <string name="update">Cập nhật</string>
+    <string name="history">Lịch sử</string>
     <string-array name="gender_array">
         <item>Nam</item>
         <item>Nữ</item>

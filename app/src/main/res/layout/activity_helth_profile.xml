@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFF"
+        android:background="@color/colorBGHomeHelth"
         tools:context=".ui.HelthProfileActivity">
         <include
             app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toBottomOf="@id/include"
             android:layout_height="wrap_content">
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:padding="20dp"
+                android:padding="@dimen/paddingHomeHelth"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.cardview.widget.CardView
@@ -61,23 +61,23 @@
                             android:scaleType="fitXY"
                             android:layout_height="wrap_content"
                             android:src="@drawable/flower"
+                            app:layout_constraintWidth_percent="0.25"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/guideline"
-                            app:layout_constraintTop_toBottomOf="@id/tvContent" />
+                            app:layout_constraintTop_toBottomOf="@id/tvContent"/>
 
                         <TextView
                             android:id="@+id/tvTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="29dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginRight="16dp"
                             android:maxLines="2"
                             android:text="@string/welcomHelth"
                             android:textColor="@color/colorTitleProfileHelth"
-                            android:textSize="@dimen/sizeTitle"
+                            android:textSize="@dimen/sizeTitleNormal"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -87,11 +87,11 @@
                             android:id="@+id/tvContent"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="24dp"
-                            android:layout_marginRight="24dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginRight="16dp"
                             android:maxLines="4"
                             android:text="@string/lorem"
                             android:textColor="@color/colorTitleProfileHelth"
@@ -105,11 +105,10 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="30dp"
+                    android:paddingBottom="@dimen/paddingBottomHomeHelth"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layoutTitle">
-
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guidelineVertical"
                         android:orientation="vertical"
@@ -121,31 +120,36 @@
                         android:id="@+id/lauoutHSSK"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginRight="4dp"
                         android:elevation="5dp"
-                        app:cardCornerRadius="10dp"
+                        app:cardCornerRadius="@dimen/cornerRadiusItemHomeHelth"
                         app:cardUseCompatPadding="true"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/guidelineVertical"
                         app:layout_constraintTop_toTopOf="parent">
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:padding="10dp"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/paddingItemHomeHelth">
+
                             <ImageView
                                 android:id="@+id/ivHeart"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:padding="5dp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:background="@drawable/bg_tym"
+                                android:padding="5dp"
                                 android:src="@drawable/ic_tym"
+                                app:layout_constraintDimensionRatio="1:1"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintWidth_percent="0.4" />
 
                             <TextView
                                 android:id="@+id/tvTitleHSSK"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
                                 android:text="@string/tittleHSSK"
                                 android:textColor="@color/colorTitleHomeHelth"
                                 android:textSize="@dimen/sizeContent"
@@ -157,7 +161,7 @@
                                 android:id="@+id/tvWeightHeight"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="4dp"
                                 android:text="@string/weightHeight"
                                 android:textColor="@color/colorTitleProfileHelth"
                                 android:textSize="@dimen/sizeContent"
@@ -171,7 +175,7 @@
                                 android:layout_marginTop="8dp"
                                 android:text="@string/time"
                                 android:textColor="@color/colorTvTime"
-                                android:textSize="@dimen/sizeSmall"
+                                android:textSize="@dimen/sizeContentSmallSmall"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/tvWeightHeight" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -181,31 +185,35 @@
                         android:id="@+id/layoutBMI"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="4dp"
                         android:elevation="5dp"
-                        app:cardCornerRadius="10dp"
+                        app:cardCornerRadius="@dimen/cornerRadiusItemHomeHelth"
                         app:cardUseCompatPadding="true"
                         app:layout_constraintLeft_toRightOf="@id/guidelineVertical"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:padding="10dp"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/paddingItemHomeHelth">
+
                             <ImageView
                                 android:id="@+id/ivBmi"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_bmi"
                                 android:padding="5dp"
                                 android:src="@drawable/bmi"
-                                android:background="@drawable/bg_bmi"
+                                app:layout_constraintDimensionRatio="1:1"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintWidth_percent="0.4" />
 
                             <TextView
                                 android:id="@+id/tvTitleBMI"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
                                 android:text="@string/tittleBMI"
                                 android:textColor="@color/colorTitleHomeHelth"
                                 android:textSize="@dimen/sizeContent"
@@ -217,7 +225,7 @@
                                 android:id="@+id/tvBMI"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="4dp"
                                 android:text="30.3"
                                 android:textColor="@color/colorTitleProfileHelth"
                                 android:textSize="@dimen/sizeContent"
@@ -228,10 +236,10 @@
                                 android:id="@+id/tvTimeBMI"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="4dp"
                                 android:text="@string/time"
                                 android:textColor="@color/colorTvTime"
-                                android:textSize="@dimen/sizeSmall"
+                                android:textSize="@dimen/sizeContentSmallSmall"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/tvBMI" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -241,32 +249,36 @@
                         android:id="@+id/layoutCalo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="16dp"
                         android:elevation="5dp"
-                        android:layout_marginBottom="15dp"
-                        app:cardCornerRadius="10dp"
+                        app:cardCornerRadius="@dimen/cornerRadiusItemHomeHelth"
                         app:cardUseCompatPadding="true"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/lauoutHSSK">
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:padding="10dp"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/paddingItemHomeHelth">
+
                             <ImageView
                                 android:id="@+id/ivCalo"
-                                android:layout_width="50dp"
-                                android:padding="5dp"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:background="@drawable/bg_calo"
-                                android:layout_height="50dp"
+                                android:padding="5dp"
                                 android:src="@drawable/calo"
+                                app:layout_constraintDimensionRatio="1:1"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintWidth_percent="0.4" />
 
                             <TextView
                                 android:id="@+id/tvTitleCalo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
                                 android:text="@string/tittleCalo"
                                 android:textColor="@color/colorTitleHomeHelth"
                                 android:textSize="@dimen/sizeContent"
@@ -278,7 +290,7 @@
                                 android:id="@+id/tvCaloAndStep"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="4dp"
                                 android:text="@string/caloAndStep"
                                 android:textColor="@color/colorTitleProfileHelth"
                                 android:textSize="@dimen/sizeContent"
@@ -289,10 +301,10 @@
                                 android:id="@+id/tvTimeCaloAndStep"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="4dp"
                                 android:text="@string/time"
                                 android:textColor="@color/colorTvTime"
-                                android:textSize="@dimen/sizeSmall"
+                                android:textSize="@dimen/sizeContentSmallSmall"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/tvCaloAndStep" />
                         </androidx.constraintlayout.widget.ConstraintLayout>

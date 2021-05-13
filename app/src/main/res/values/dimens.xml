@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="sizeContent">14sp</dimen>
-    <dimen name="sizeTitle">17sp</dimen>
-    <dimen name="sizeSmall">11sp</dimen>
+    <dimen name="sizeTitle">16sp</dimen>
+    <dimen name="sizeContentSmall">11sp</dimen>
+    <dimen name="sizeTitleBig">18sp</dimen>
+    <dimen name="sizeTitleNormal">17sp</dimen>
+    <dimen name="sizeContentSmallSmall">11sp</dimen>
+    <dimen name="paddingHomeHelth">20dp</dimen>
+    <dimen name="paddingBottomHomeHelth">127dp</dimen>
+    <dimen name="paddingItemHomeHelth">12dp</dimen>
+    <dimen name="cornerRadiusItemHomeHelth">10dp</dimen>
+    <dimen name="paddingEdtName">12dp</dimen>
+    <dimen name="paddingBottomMyProfile">75dp</dimen>
 </resources>

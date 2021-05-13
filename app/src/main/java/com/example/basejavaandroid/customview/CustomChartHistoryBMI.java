@@ -41,6 +41,7 @@ public class CustomChartHistoryBMI extends View {
     public void setListHistory(List<BmiHistory> listHistory) {
         this.listHistory = listHistory;
         numberColumnRec = this.listHistory.size();
+        invalidate();
     }
 
     public CustomChartHistoryBMI(Context context) {
