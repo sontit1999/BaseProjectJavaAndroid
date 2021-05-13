@@ -40,15 +40,12 @@
                     android:id="@+id/tvBMI"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/whatBMI"
                     android:textColor="#302E2E"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-                    app:layout_constraintStart_toEndOf="@+id/ivBack"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -62,19 +59,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvBMI" />
+
                 <TextView
                     android:id="@+id/tvHowToBMI"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/whatBMI"
                     android:textColor="#302E2E"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-                    app:layout_constraintStart_toEndOf="@+id/ivBack"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvDetail" />
                 <TextView
                     android:id="@+id/tvHowToBMIDetail"
