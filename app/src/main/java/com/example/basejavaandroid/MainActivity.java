@@ -14,9 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.Observer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.basejavaandroid.base.BaseActivity;
+import com.example.basejavaandroid.customview.CenterZoomLayoutManager;
 import com.example.basejavaandroid.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -168,7 +170,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewmode
     @Override
     protected void setBindingViewmodel() {
          binding.setViewmodel(viewmodel);
-
+         binding.rvFilm.setLayoutManager(new CenterZoomLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
     }
 
     @Override

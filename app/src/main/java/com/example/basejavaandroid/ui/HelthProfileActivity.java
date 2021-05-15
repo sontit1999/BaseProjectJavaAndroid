@@ -26,24 +26,9 @@ public class HelthProfileActivity extends BaseActivity<ActivityHelthProfileBindi
 
     @Override
     protected void initEvent() {
-             binding.include.ivBack.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     finish();
-                 }
-             });
-             binding.layoutBMI.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     gotoActivityNoData(BmiActivity.class);
-                 }
-             });
-             binding.include.profileImage.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     gotoActivityNoData(MyProfileHelthActivity.class);
-                 }
-             });
+             binding.include.ivBack.setOnClickListener(v -> finish());
+             binding.layoutBMI.setOnClickListener(v -> gotoActivityNoData(BmiActivity.class));
+             binding.include.profileImage.setOnClickListener(v -> gotoActivityNoData(MyProfileHelthActivity.class));
     }
 
     @Override

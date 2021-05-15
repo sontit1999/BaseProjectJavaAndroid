@@ -35,11 +35,12 @@
                <com.example.basejavaandroid.customview.CustomChartHistoryBMI
                    android:id="@+id/chartHistory"
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   app:TextsizeScore="7sp"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toTopOf="parent" />
+                   app:layout_constraintTop_toTopOf="parent"
+                   android:layout_height="0dp"
+                   app:TextsizeScore="7sp"
+                   />
                <TextView
                    android:id="@+id/tvHistory"
                    android:layout_width="0dp"

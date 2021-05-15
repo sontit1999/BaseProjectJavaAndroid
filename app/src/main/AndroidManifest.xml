@@ -34,7 +34,9 @@
         <activity android:name=".BookingActivity" />
         <activity android:name=".CustomActivity" />
         <activity android:name=".DetailActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" >
+
+        </activity>
 
         <service
             android:name=".service.MyFirebaseMessagingService"
