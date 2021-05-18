@@ -1,10 +1,5 @@
 package com.example.basejavaandroid.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.view.View;
-
 import com.bumptech.glide.Glide;
 import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.base.BaseActivity;
