@@ -1,7 +1,5 @@
 package com.example.basejavaandroid.base;
 
-import android.graphics.BlendMode;
-import android.graphics.BlendModeColorFilter;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.basejavaandroid.R;
-import com.example.basejavaandroid.customview.TestView;
 
 public class BindingUtils {
     @BindingAdapter({ "setAdapter"})

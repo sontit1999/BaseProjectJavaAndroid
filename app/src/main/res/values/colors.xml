@@ -16,4 +16,18 @@
     <color name="colorBGHomeHelth">#FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="TitleNameHomehelth">#474747</color>
+    <color name="color_description_guide_step">#2D2D2D</color>
+    <color name="color_number_selected_guide_step">#1EB37D</color>
+    <color name="color_number_not_selected_guide_step">#828282</color>
+
+    <!--    Health-->
+    <color name="lifestyle_blue">#138CE3</color>
+    <color name="green">#1EB37D</color>
+    <color name="yellow">#FFBF1A</color>
+    <color name="red">#D83E3E</color>
+    <color name="violet">#B31E8D</color>
+    <color name="ruler_line_color">#F0F0F0</color>
+    <color name="colorNumberBMI">#474747</color>
+    <color name="colorBackgroundHomeHealth">#E5E5E5</color>
+    <color name="color_line">#F0F0F0</color>
 </resources>

@@ -5,9 +5,9 @@ import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.base.BaseAdapter;
 import com.example.basejavaandroid.base.BaseCBAdapter;
 import com.example.basejavaandroid.databinding.ItemRowHistoryBinding;
-import com.example.basejavaandroid.model.BmiHistory;
+import com.example.basejavaandroid.model.BmiHistoryRes;
 
-public class BmiHistoryAdapter  extends BaseAdapter<BmiHistory, ItemRowHistoryBinding> {
+public class BmiHistoryAdapter extends BaseAdapter<BmiHistoryRes, ItemRowHistoryBinding> {
     @Override
     protected int getLayoutId() {
         return R.layout.item_row_history;

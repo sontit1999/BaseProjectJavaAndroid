@@ -1,15 +1,13 @@
 package com.example.basejavaandroid.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-
-import android.os.Bundle;
 import android.view.View;
+
+import androidx.lifecycle.Observer;
 
 import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.base.BaseActivity;
 import com.example.basejavaandroid.databinding.ActivityBmiHistoryBinding;
-import com.example.basejavaandroid.model.BmiHistory;
+import com.example.basejavaandroid.model.BmiHistoryRes;
 
 import java.util.List;
 
@@ -20,11 +18,11 @@ public class BmiHistoryActivity extends BaseActivity<ActivityBmiHistoryBinding,B
     protected void getData() {
 
         binding.include.tvTitle.setText("Lịch sử BMI");
-        viewmodel.getArrHistory().observe(this, new Observer<List<BmiHistory>>() {
+        viewmodel.getArrHistory().observe(this, new Observer<List<BmiHistoryRes>>() {
             @Override
-            public void onChanged(List<BmiHistory> bmiHistories) {
-                viewmodel.bmiHistoryAdapter.setList(bmiHistories);
-                binding.chartHistory.setListHistory(bmiHistories);
+            public void onChanged(List<BmiHistoryRes> bmiHistoryRes) {
+                binding.chartHistory.setListHistory(bmiHistoryRes);
+                viewmodel.bmiHistoryAdapter.setList(bmiHistoryRes);
             }
         });
     }

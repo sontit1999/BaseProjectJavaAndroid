@@ -1,9 +1,6 @@
 package com.example.basejavaandroid.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
@@ -30,8 +27,8 @@ public class BmiResultActivity extends BaseActivity<ActivityBmiResultBinding,Bmi
                  binding.edtHeight.setText(UtilsFunction.ConvertFloatToString(bmiInfor.getH()));
                  binding.edtWeight.setText(UtilsFunction.ConvertFloatToString(bmiInfor.getW()));
                  float scoreBMI = bmiInfor.getScoreBMI();
-                 Log.d("sondz",scoreBMI + "");
-                 binding.chartBMI.setScroreBMI(scoreBMI);
+                 Log.d("sondz", scoreBMI + "");
+                 binding.chartBMI.setScoreBMI(scoreBMI);
              }
          }
     }

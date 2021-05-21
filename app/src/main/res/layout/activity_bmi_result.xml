@@ -169,7 +169,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.example.basejavaandroid.customview.CustomChartBMIResult
+        <com.example.basejavaandroid.customview.ChartResultBmi
             android:id="@+id/chartBMI"
             android:layout_width="0dp"
             android:layout_height="5dp"

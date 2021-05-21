@@ -31,4 +31,63 @@
         <item>Nam</item>
         <item>Nữ</item>
     </string-array>
+    <string name="bmi_history_toolbar_title">Lịch sử BMI</string>
+    <string name="bmi_index_type_flat">Thiếu cân</string>
+    <string name="bmi_index_type_normal">Bình thường</string>
+    <string name="bmi_index_type_over_weight">Thừa cân</string>
+    <string name="bmi_index_type_over">Béo phì</string>
+
+    <!--    Challenge-->
+    <string name="challenge_list_chall">Danh sách thử thách</string>
+    <string name="challenge_my_chall">Thử thách của tôi</string>
+    <string name="challenge_lifestyle_chall">Thử thách Lifestyle</string>
+    <string name="sex">Giới tính</string>
+    <string name="HowToBMI">Cách đo chí số BMI như thế nào?</string>
+    <string name="savetohistory">Lưu vào lịch sử</string>
+    <string name="caculateBMI">Tính BMI</string>
+    <string name="flower">flower</string>
+    <string name="heart">heart</string>
+    <string name="score">0</string>
+    <string name="coverImage">coverImage</string>
+    <string name="kg">kg</string>
+    <string name="_178">178</string>
+    <string name="_60">60</string>
+    <string name="cm">cm</string>
+    <string name="chisobmi">Chỉ số BMI</string>
+    <string name="phanloai">Phân Loại</string>
+    <string name="thieucan">Thiếu cân</string>
+    <string name="rangeWeight1">18.5 - 24.9</string>
+    <string name="nomarl">Bình thường</string>
+    <string name="rangeWeight2">25 - 29.9</string>
+    <string name="thuacan">Thừa cân</string>
+    <string name="rangeWeight3">30 - 34.9</string>
+    <string name="rangeWeight4">Béo phì cấp độ I</string>
+    <string name="rangeWeight5">35 - 39.9</string>
+    <string name="beophi1">Béo phì cấp độ II</string>
+    <string name="rangeWeight6"><![CDATA[>40]]></string>
+    <string name="beophi3">Béo phì cấp độ III</string>
+    <string name="beophi2">Béo phì cấp độ II</string>
+    <string name="health">Sức khỏe</string>
+    <string name="myprofile">Hồ sơ sức khỏe của tôi</string>
+    <string name="tinnhBmi">Tính BMI</string>
+    <string name="rangeWeight40"><![CDATA[>40.0]]></string>
+    <string name="updateSuccess">Cập nhật thành công</string>
+    <string name="beophi">Béo phì</string>
+    <string name="saveHistorySuccess">Lưu vào lịch sử thành công !</string>
+    <string name="notEmpty">Không được bỏ trống trường nào !</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="sunday">Sun</string>
+    <string name="edtprf_height_empty">Cân nặng không được bỏ trống</string>
+    <string name="heightMoreZero">Chiều cao phải lớn hơn 0</string>
+    <string name="weightMoreZero">Cân nặng phải lớn hơn 0</string>
+    <string name="bmiMoreZero">Chỉ số BMI phải lớn hơn 0</string>
+    <string name="stepMoreZero">Số bước phải lớn hơn 0</string>
+    <string name="steps">bước</string>
+    <string name="mustHasValue">Bạn cần nhập đủ thông tin cân nặng và chiều cao</string>
+    <string name="noDataReturn">Lưu lịch sử BMI chưa thành công!</string>
 </resources>

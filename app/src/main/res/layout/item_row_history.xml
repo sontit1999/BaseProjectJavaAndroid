@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-       <variable
-           name="bmihistory"
-           type="com.example.basejavaandroid.model.BmiHistory" />
+
+        <variable
+            name="bmihistory"
+            type="com.example.basejavaandroid.model.BmiHistoryRes" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +19,6 @@
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:layout_marginStart="8dp"
-            bind:setBGcolor="@{bmihistory.score}"
             android:layout_marginLeft="8dp"
             android:background="@drawable/bg_circle"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,10 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:text="@{String.valueOf(bmihistory.score)}"
-            bind:displayFloat="@{bmihistory.score}"
             android:textColor="#252323"
             android:textSize="14sp"
+            android:text="@{String.valueOf(bmihistory.score)}"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/CirclerView"
             app:layout_constraintStart_toEndOf="@+id/CirclerView"
@@ -48,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:text="@{bmihistory.weright + `kg, ` + bmihistory.height +`m`}"
             android:textColor="#555252"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/CirclerView"
@@ -64,7 +60,6 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:gravity="right"
-            android:text="@{bmihistory.time}"
             android:textColor="#555252"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/CirclerView"
