@@ -169,7 +169,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.example.basejavaandroid.customview.ChartResultBmi
+        <com.example.basejavaandroid.customview.CustomChartBMIResult
             android:id="@+id/chartBMI"
             android:layout_width="0dp"
             android:layout_height="5dp"
@@ -178,7 +178,6 @@
             app:layout_constraintStart_toStartOf="@+id/edtWeight"
             app:layout_constraintTop_toTopOf="@+id/guideline3"
             app:sizeTextScore="12sp" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
             app:layout_constraintGuide_percent="0.5"

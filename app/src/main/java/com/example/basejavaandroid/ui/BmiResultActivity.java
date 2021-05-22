@@ -28,7 +28,7 @@ public class BmiResultActivity extends BaseActivity<ActivityBmiResultBinding,Bmi
                  binding.edtWeight.setText(UtilsFunction.ConvertFloatToString(bmiInfor.getW()));
                  float scoreBMI = bmiInfor.getScoreBMI();
                  Log.d("sondz", scoreBMI + "");
-                 binding.chartBMI.setScoreBMI(scoreBMI);
+                 binding.chartBMI.setScroreBMI(scoreBMI);
              }
          }
     }

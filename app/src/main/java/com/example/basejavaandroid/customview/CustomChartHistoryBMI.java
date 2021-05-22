@@ -6,14 +6,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.model.BmiHistoryRes;
@@ -155,7 +153,7 @@ public class CustomChartHistoryBMI extends View {
         for (int i = 1; i <= listHistory.size(); i++) {
             mTextPaint.getTextBounds(String.valueOf(listHistory.get(i - 1).getScore()), 0, String.valueOf(listHistory.get(i - 1).getScore()).length(), bounds);
             drawRectangleWithColor(canvas, (int) ((2 * i - 1) * dx), (float) listHistory.get(i - 1).getScore());
-            drawTextTime(canvas, (int) ((2 * i - 1) * dx), yTime, ConvertTimeToString(listHistory.get(i - 1).getUpdated_at()), false, false);
+            drawTextTime(canvas, (int) ((2 * i - 1) * dx), yTime, ConvertTimeToString(listHistory.get(i - 1).getUpdateAt()), false, false);
             drawScoreBMI(canvas, mTextPaint, (int) ((2 * i - 1) * dx + dx / 2f), (int) (heightView - dy - dy / 2f), ConvertFloatToString((float) listHistory.get(i - 1).getScore()), textSize * 1.2f, true, Color.WHITE);
         }
 
@@ -230,12 +228,12 @@ public class CustomChartHistoryBMI extends View {
         CharSequence str = TextUtils.ellipsize(text,
                 (TextPaint) mTextPaint, getWidth(),
                 TextUtils.TruncateAt.END);
-        Typeface plain = ResourcesCompat.getFont(getContext(), R.font.montserrat_bold);
-        mTextPaint.setTypeface(plain);
+       /* Typeface plain = ResourcesCompat.getFont(getContext(), R.font.montserrat);
+        mTextPaint.setTypeface(plain);*/
         canvas.drawText(str, 0, str.length(), x - width / 2f, y + height / 2f, mTextPaint);
         mTextPaint.setTextSize(currentSize);
         mTextPaint.setColor(currentColor);
-        mTextPaint.setTypeface(ResourcesCompat.getFont(getContext(), R.font.montserrat_regular));
+        /* mTextPaint.setTypeface(ResourcesCompat.getFont(getContext(), R.font.montserrat));*/
     }
 
     public void drawTextCenterPostition(Canvas canvas, int x, int y, String text, boolean isCenterX, boolean isCenterY) {
