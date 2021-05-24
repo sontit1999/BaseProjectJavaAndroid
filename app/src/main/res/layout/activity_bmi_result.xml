@@ -178,6 +178,12 @@
             app:layout_constraintStart_toStartOf="@+id/edtWeight"
             app:layout_constraintTop_toTopOf="@+id/guideline3"
             app:sizeTextScore="12sp" />
+
+        <com.example.basejavaandroid.customview.CustomCategoryBMI
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/chartBMI" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
             app:layout_constraintGuide_percent="0.5"

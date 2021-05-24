@@ -15,16 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BaseJavaAndroid">
         <activity android:name=".ui.mallclub.HomeFanClubActivity">
+
+        </activity>
+        <activity android:name=".TestProfileCollapsingActivity"></activity>
+        <activity android:name=".ui.MyProfileHelthActivity"></activity>
+        <activity android:name=".ui.HelthProfileActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".TestProfileCollapsingActivity"></activity>
-        <activity android:name=".ui.MyProfileHelthActivity"></activity>
-        <activity android:name=".ui.HelthProfileActivity">
-
         </activity>
         <activity android:name=".ui.BmiHistoryActivity" />
         <activity android:name=".ui.BmiActivity" />

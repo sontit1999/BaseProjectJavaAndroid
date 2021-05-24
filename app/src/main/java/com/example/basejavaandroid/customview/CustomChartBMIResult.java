@@ -223,11 +223,11 @@ public class CustomChartBMIResult extends View {
             drawTextCenterPostittionX(canvas,i*d,y,String.valueOf(listBeakScore[i-1]));
         }
         int index = 1;
-        for(int i=1;i<=4;i++){
+        /*for(int i=1;i<=4;i++){
             drawTextCenterPostittionXCustomSize(canvas,index*distanmin,y+heightView/10+height,listDescribe[i-1],sizeText*0.7f);
             index += 2;
             drawCicleAndTextPosWithColor(canvas,(i-1)*d,y+heightView/10,listColor[i-1]);
-        }
+        }*/
     }
     public void drawTriangleWithColor(Canvas canvas, int color, int y, int width) {
 
