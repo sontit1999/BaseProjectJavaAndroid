@@ -89,26 +89,22 @@
                     app:layout_constraintTop_toBottomOf="@id/tvHowToBMIDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/ivIngredient"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/bmi_ct"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <include layout="@layout/item_ct_bmi"></include>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TableLayout
                     android:id="@+id/tableLayoutDetail"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:layout_marginTop="16dp"
                     android:stretchColumns="*"
-                    app:layout_constraintTop_toBottomOf="@id/layoutCTBmi"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:layout_height="wrap_content">
-                    <TableRow >
+                    app:layout_constraintTop_toBottomOf="@id/layoutCTBmi">
+
+                    <TableRow>
+
                         <TextView
                             android:id="@+id/tvChiSoBMI"
                             android:layout_width="wrap_content"
@@ -124,145 +120,150 @@
                             android:id="@+id/tvPhanLoai"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Phân Loại"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
                             android:gravity="left"
+                            android:text="Phân Loại"
+                            android:textColor="#5C5858"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-                            />
+                            android:textStyle="bold" />
                     </TableRow>
+
                     <TableRow android:layout_marginTop="15dp">
+
                         <TextView
                             android:id="@+id/tvNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/muoitamphay5"
-                            android:gravity="left"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
-                            android:textSize="14sp"
-                            />
+                            android:gravity="left"
+                            android:text="@string/muoitamphay5"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tvPhanLoai1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Thiếu cân"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
                             android:gravity="left"
-                            android:textSize="14sp"
-                            />
+                            android:text="Thiếu cân"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
                     </TableRow>
+
                     <TableRow android:layout_marginTop="10dp">
+
                         <TextView
                             android:id="@+id/tvNumber2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="18.5 - 24.9"
-                            android:gravity="left"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
-                            android:textSize="14sp"
-                            />
+                            android:gravity="left"
+                            android:text="18.5 - 24.9"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tvPhanLoai2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Bình thường"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
                             android:gravity="left"
-                            android:textSize="14sp"
-                            />
+                            android:text="Bình thường"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
                     </TableRow>
+
                     <TableRow android:layout_marginTop="10dp">
+
                         <TextView
                             android:id="@+id/tvNumber3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="25 - 29.9"
-                            android:gravity="left"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
-                            android:textSize="14sp"
-                            />
+                            android:gravity="left"
+                            android:text="25 - 29.9"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tvPhanLoai3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Thừa cân"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
                             android:gravity="left"
-                            android:textSize="14sp"
-                            />
+                            android:text="Thừa cân"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
                     </TableRow>
+
                     <TableRow android:layout_marginTop="10dp">
+
                         <TextView
                             android:id="@+id/tvNumber4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="30 - 34.9"
-                            android:gravity="left"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
-                            android:textSize="14sp"
-                            />
+                            android:gravity="left"
+                            android:text="30 - 34.9"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tvPhanLoai4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Béo phì cấp độ I"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
                             android:gravity="left"
-                            android:textSize="14sp"
-                            />
+                            android:text="Béo phì cấp độ I"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
                     </TableRow>
+
                     <TableRow android:layout_marginTop="10dp">
+
                         <TextView
                             android:id="@+id/tvNumber5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="35 - 39.9"
-                            android:gravity="left"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
-                            android:textSize="14sp"
-                            />
+                            android:gravity="left"
+                            android:text="35 - 39.9"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tvPhanLoai5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Béo phì cấp độ II"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
                             android:gravity="left"
-                            android:textSize="14sp"
-                            />
+                            android:text="Béo phì cấp độ II"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
                     </TableRow>
+
                     <TableRow android:layout_marginTop="10dp">
+
                         <TextView
                             android:id="@+id/tvNumber6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=">40"
-                            android:gravity="left"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
-                            android:textSize="14sp"
-                            />
+                            android:gravity="left"
+                            android:text=">40"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
+
                         <TextView
                             android:id="@+id/tvPhanLoai6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Béo phì cấp độ III"
-                            android:textColor="#5C5858"
                             android:layout_span="2"
                             android:gravity="left"
-                            android:textSize="14sp"
-                            />
+                            android:text="Béo phì cấp độ III"
+                            android:textColor="#5C5858"
+                            android:textSize="14sp" />
                     </TableRow>
                 </TableLayout>
 
@@ -286,7 +287,7 @@
                     <Button
                         android:id="@+id/btnCalucateBMI"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginEnd="16dp"
@@ -294,6 +295,7 @@
                         android:background="@drawable/bg_button_tinhbmi"
                         android:fontFamily="@font/montserrat"
                         android:padding="@dimen/paddingEdtName"
+                        android:gravity="center"
                         android:text="Bảng tính BMI"
                         android:textAllCaps="true"
                         android:textColor="@color/colorWhite"
@@ -304,13 +306,14 @@
                     <Button
                         android:id="@+id/btnHistoryBMI"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
-                        android:background="@drawable/bg_back_bmi"
+                        android:background="@drawable/bg_btn_stroke_bmi"
                         android:text="@string/history"
+                        android:gravity="center"
                         android:textAllCaps="true"
                         android:padding="@dimen/paddingEdtName"
                         android:textColor="@color/colorTitleProfileHelth"

@@ -5,7 +5,9 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -78,8 +80,7 @@ public class CustomChartHistoryBMI extends View {
     }
 
     private void initPaint() {
-        mPaint = new Paint();
-        mTextPaint = new Paint();
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setColor(colorText);
         mTextPaint.setTextSize(textSize);
@@ -152,9 +153,9 @@ public class CustomChartHistoryBMI extends View {
         int yTime = (int) (heightView - dy / 2 - height / 2f);
         for (int i = 1; i <= listHistory.size(); i++) {
             mTextPaint.getTextBounds(String.valueOf(listHistory.get(i - 1).getScore()), 0, String.valueOf(listHistory.get(i - 1).getScore()).length(), bounds);
-            drawRectangleWithColor(canvas, (int) ((2 * i - 1) * dx), (float) listHistory.get(i - 1).getScore());
+            drawRectangleWithColor(canvas, (int) ((2 * i - 1) * dx), listHistory.get(i - 1).getScore());
             drawTextTime(canvas, (int) ((2 * i - 1) * dx), yTime, ConvertTimeToString(listHistory.get(i - 1).getUpdateAt()), false, false);
-            drawScoreBMI(canvas, mTextPaint, (int) ((2 * i - 1) * dx + dx / 2f), (int) (heightView - dy - dy / 2f), ConvertFloatToString((float) listHistory.get(i - 1).getScore()), textSize * 1.2f, true, Color.WHITE);
+            drawScoreBMI(canvas, mTextPaint, (int) ((2 * i - 1) * dx + dx / 2f), (int) (heightView - dy - dy / 2f), ConvertFloatToString(listHistory.get(i - 1).getScore()), textSize * 1.2f, true, Color.WHITE);
         }
 
     }
@@ -209,7 +210,8 @@ public class CustomChartHistoryBMI extends View {
         mPaintDrawRectangleScore.setStyle(Paint.Style.FILL);
         mPaintDrawRectangleScore.setColor(colorRec);
         Rect rect = new Rect(left, (int) ((heightView - dy - heightRectangle)), (int) (left + dx), (int) (heightView - dy));
-        canvas.drawRect(rect, mPaintDrawRectangleScore);
+        drawRectangleWithColorAndBoderRadius(canvas, colorRec, rect);
+        // canvas.drawRect(rect, mPaintDrawRectangleScore);
         mPaintDrawRectangleScore.setColor(currentColor);
     }
 
@@ -322,5 +324,21 @@ public class CustomChartHistoryBMI extends View {
             e.printStackTrace();
         }
         return formatter.format(date);
+    }
+
+    public void drawRectangleWithColorAndBoderRadius(Canvas canvas, int color, Rect rect) {
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(color);
+        //draw rectange boder radius
+        float boderRadius = (rect.right - rect.left) / 2f;
+        float[] cornersTop = new float[]{
+                boderRadius, boderRadius,        // Top left radius in px
+                boderRadius, boderRadius,    // Top right radius in px
+                0, 0,          // Bottom right radius in px
+                0, 0           // Bottom left radius in px
+        };
+        final Path path = new Path();
+        path.addRoundRect(new RectF(rect.left, rect.top, rect.right, rect.bottom), cornersTop, Path.Direction.CW);
+        canvas.drawPath(path, mPaint);
     }
 }
