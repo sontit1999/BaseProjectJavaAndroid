@@ -4,11 +4,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
 import com.example.basejavaandroid.R;
 
-public class CustomCategoryBMI extends RelativeLayout {
+
+public class CustomCategoryBMI extends FrameLayout {
     View viewThin, viewNormal, viewMuch, viewFat;
 
     public CustomCategoryBMI(Context context) {

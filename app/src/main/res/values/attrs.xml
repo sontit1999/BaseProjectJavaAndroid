@@ -10,10 +10,14 @@
         <attr name="hado_distance" format="dimension" />
     </declare-styleable>
     <declare-styleable name="CustomChartBMIResult">
-        <attr name="colorTriangle" format="color" ></attr>
-        <attr name="sizeTextScore" format="dimension" ></attr>
+        <attr name="colorTriangle" format="color"></attr>
+        <attr name="sizeTextScore" format="dimension"></attr>
     </declare-styleable>
     <declare-styleable name="CustomChartHistoryBMI">
-        <attr name="TextsizeScore" format="dimension" ></attr>
+        <attr name="TextsizeScore" format="dimension"></attr>
+    </declare-styleable>
+    <declare-styleable name="CustomBmiResultST">
+        <attr name="sizeScore" format="dimension"></attr>
+        <attr name="sizeRangeScore" format="dimension"></attr>
     </declare-styleable>
 </resources>
