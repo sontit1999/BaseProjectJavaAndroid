@@ -95,7 +95,6 @@
             android:layout_marginRight="8dp"
             android:ems="10"
             android:textColor="#494747"
-            android:enabled="false"
             android:padding="10dp"
             android:background="@drawable/bg_gender"
             android:inputType="textPersonName"
@@ -114,7 +113,6 @@
             android:layout_marginRight="8dp"
             android:background="@drawable/bg_gender"
             android:ems="10"
-            android:enabled="false"
             android:inputType="textPersonName"
             android:padding="10dp"
             android:textColor="#494747"
@@ -169,15 +167,25 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.example.basejavaandroid.customview.ChartResultBmi
+        <com.example.basejavaandroid.customview.CustomBmiResultST
             android:id="@+id/chartBMI"
             android:layout_width="0dp"
             android:layout_height="5dp"
+            app:sizeRangeScore="14sp"
+            app:sizeScore="40sp"
             app:layout_constraintEnd_toEndOf="@+id/textView4"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/edtWeight"
             app:layout_constraintTop_toTopOf="@+id/guideline3"
             app:sizeTextScore="12sp" />
+
+        <com.example.basejavaandroid.customview.CustomCategoryBMI
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chartBMI" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

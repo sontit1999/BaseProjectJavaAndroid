@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvthin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Thiếu cân"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormal"
+        app:layout_constraintEnd_toStartOf="@id/viewNormal"
+        app:layout_constraintStart_toEndOf="@id/viewthin"
+        app:layout_constraintTop_toTopOf="@id/tvNormal" />
+
+    <View
+        android:id="@+id/viewthin"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="@color/lessweight"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormal"
+        app:layout_constraintEnd_toStartOf="@+id/tvthin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvNormal" />
+
+    <TextView
+        android:id="@+id/tvNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bình thường"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintEnd_toStartOf="@id/viewMuch"
+        app:layout_constraintStart_toEndOf="@id/viewNormal"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/viewNormal"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="@color/normalweight"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/tvNormal"
+        app:layout_constraintStart_toEndOf="@id/tvthin"
+        app:layout_constraintTop_toTopOf="@+id/tvNormal" />
+
+    <TextView
+        android:id="@+id/tvMuch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thừa cân"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormal"
+        app:layout_constraintEnd_toStartOf="@id/viewFat"
+        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintStart_toEndOf="@id/viewMuch"
+        app:layout_constraintTop_toTopOf="@id/tvNormal"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/viewMuch"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="@color/moreweight"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/tvMuch"
+        app:layout_constraintStart_toEndOf="@id/tvNormal"
+        app:layout_constraintTop_toTopOf="@+id/tvNormal" />
+
+    <TextView
+        android:id="@+id/tvFat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Béo phì"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/viewFat"
+        app:layout_constraintTop_toTopOf="@id/tvNormal" />
+
+    <View
+        android:id="@+id/viewFat"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="@color/fatweight"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/tvFat"
+        app:layout_constraintStart_toEndOf="@id/tvMuch"
+        app:layout_constraintTop_toTopOf="@+id/tvNormal" />
+</androidx.constraintlayout.widget.ConstraintLayout>

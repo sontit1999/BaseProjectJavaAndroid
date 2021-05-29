@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.basejavaandroid.ui.mallclub.fragment.ReviewViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/edtKeyword"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_gender"
+            android:hint="Tìm kiếm"
+            android:paddingLeft="45dp"
+            android:textSize="@dimen/sizeContent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/searchs"
+            app:layout_constraintBottom_toBottomOf="@+id/edtKeyword"
+            app:layout_constraintStart_toStartOf="@id/edtKeyword"
+            app:layout_constraintTop_toTopOf="@+id/edtKeyword" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/arrow"
+            android:drawablePadding="15dp"
+            android:text="Thời trang"
+            android:textSize="@dimen/sizeContent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtKeyword" />
+
+        <TextView
+            android:id="@+id/tvBranch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="12dp"
+            android:drawableRight="@drawable/arrow"
+            android:drawablePadding="15dp"
+            android:text="Branch"
+            android:textSize="@dimen/sizeContent"
+            app:layout_constraintStart_toEndOf="@id/tvCategory"
+            app:layout_constraintTop_toBottomOf="@+id/edtKeyword" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvReview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvBranch" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,6 +1,5 @@
 package com.example.basejavaandroid.customview;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -20,10 +19,11 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.example.basejavaandroid.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomChartBMIResult extends View {
+public class ChartResultBmi extends View {
     public static final float DEFAULT_BMI = 20;
     public static final int DEFAULT_COLOR_TRIANGLE = Color.DKGRAY;
     private static final int DEFAULT_TEXT_SIZE = 30;
@@ -39,37 +39,44 @@ public class CustomChartBMIResult extends View {
     float[] listBeakScore = new float[]{18.5f, 25, 30};
 
     List<Rect> listRect = new ArrayList<>();
-    String[] listDescribe = new String[]{"Thiếu Cân", "Bình Thường", "Thừa Cân", "Béo Phì"};
-    int[] listColor = new int[]{Color.parseColor("#138ce3"), Color.parseColor("#1eb37d"), Color.parseColor("#ffbf19"), Color.parseColor("#d83e3e")};
+    int[] listColor = new int[]{getResources().getColor(R.color.lessweight), getResources().getColor(R.color.normalweight), getResources().getColor(R.color.moreweight), getResources().getColor(R.color.fatweight)};
 
-    public CustomChartBMIResult(Context context) {
+    public ChartResultBmi(Context context) {
         super(context);
-        // lấy các giá trị người dùng từ file XML
-        initPaint();
-        scoreBMI = DEFAULT_BMI;
-        colorTriangle = DEFAULT_COLOR_TRIANGLE;
-
+        initView(context, null);
     }
 
-    public CustomChartBMIResult(Context context, @Nullable AttributeSet attrs) {
+    public ChartResultBmi(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        scoreBMI = DEFAULT_BMI;
-        colorTriangle = DEFAULT_COLOR_TRIANGLE;
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomChartBMIResult);
-        this.sizeText = typedArray.getDimensionPixelSize(R.styleable.CustomChartBMIResult_sizeTextScore, DEFAULT_TEXT_SIZE);
-        typedArray.recycle();
-        initPaint();
+        initView(context, attrs);
     }
 
-    public CustomChartBMIResult(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ChartResultBmi(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+        initView(context, attrs);
+
+    }
+
+    private void initView(Context context, AttributeSet attrs) {
+        // lấy các giá trị người dùng từ file XML
+
         scoreBMI = DEFAULT_BMI;
         colorTriangle = DEFAULT_COLOR_TRIANGLE;
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomChartBMIResult);
-        this.sizeText = typedArray.getDimensionPixelOffset(R.styleable.CustomChartBMIResult_sizeTextScore, DEFAULT_TEXT_SIZE);
-        typedArray.recycle();
-        initPaint();
+
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint.setColor(colorText);
+        mTextPaint.setTextSize(sizeText);
+        Typeface plain = ResourcesCompat.getFont(getContext(), R.font.roboto);
+        mTextPaint.setTypeface(plain);
+
+        if (attrs != null) {
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomChartBMIResult);
+            this.sizeText = typedArray.getDimensionPixelOffset(R.styleable.CustomChartBMIResult_sizeTextScore, DEFAULT_TEXT_SIZE);
+            typedArray.recycle();
+        }
     }
 
     public float getScoreBMI() {
@@ -79,16 +86,6 @@ public class CustomChartBMIResult extends View {
     public void setScoreBMI(float scoreBMI) {
         this.scoreBMI = scoreBMI;
         invalidate();
-    }
-
-    private void initPaint() {
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setColor(colorText);
-        mTextPaint.setTextSize(sizeText);
-        Typeface plain = ResourcesCompat.getFont(getContext(), R.font.roboto);
-        mTextPaint.setTypeface(plain);
-
     }
 
     @Override
@@ -103,12 +100,11 @@ public class CustomChartBMIResult extends View {
         } else {
             widthView = 0;
         }
-        heightView = (int) (widthView * 0.0569196f * 5);
-
+        heightView = (int) (widthView * (20 / 344f) * 5);
         setMeasuredDimension(widthSize, heightView);
     }
 
-    @SuppressLint("DrawAllocation")
+
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
@@ -117,9 +113,9 @@ public class CustomChartBMIResult extends View {
         lengthRectangle = widthView / 4;
         listRect.clear();
         for (int i = 0; i < 4; i++) {
-            float topRect = (float) ((heightView * 2) / 5);
-            float bottomRect = (float) ((heightView * 2) / 5) + (float) heightView / 5;
-            listRect.add(new Rect(i * lengthRectangle - 1, (int) topRect, (i + 1) * lengthRectangle, (int) bottomRect));
+            float topRect = (float) ((heightView * 2) / 4);
+            float bottomRect = (float) ((heightView * 2) / 4) + (float) heightView / 4;
+            listRect.add(new Rect(i * lengthRectangle, (int) topRect, (i + 1) * lengthRectangle, (int) bottomRect));
         }
     }
 
@@ -138,7 +134,7 @@ public class CustomChartBMIResult extends View {
 
 
         }
-        drawTriangleWithColor(canvas, Color.DKGRAY, (heightView / 5) + heightView / 8, heightView / 8);
+        drawTriangleWithColor(canvas, Color.DKGRAY, (int) (((heightView * 2) / 4) - (((heightView * 0.8) / 10f))), (int) ((heightView * 0.8) / 5f));
         drawBeakPoint(canvas);
     }
 
@@ -203,21 +199,13 @@ public class CustomChartBMIResult extends View {
         mTextPaint.setTextSize(curentSize);
     }
 
-    public void drawCicleAndTextPosWithColor(Canvas canvas, int x, int y, int color) {
-        int curentColor = mPaint.getColor();
-        mPaint.setColor(color);
-        int radiusCircle = heightView / 22;
-        canvas.drawCircle(x + radiusCircle, y - radiusCircle, radiusCircle, mPaint);
-        mPaint.setColor(curentColor);
-
-    }
-
     public void drawTextCenterPostittionCustom(Canvas canvas, int x, int y, String text, float sizeText, int colorText) {
-        float curentSize = mTextPaint.getTextSize();
+        float currentSize = mTextPaint.getTextSize();
         int currentColor = mTextPaint.getColor();
+
         mTextPaint.setTextSize(sizeText);
         mTextPaint.setColor(colorText);
-        mTextPaint.setFakeBoldText(true);
+
         // custom font
         Typeface currentTypeface = mTextPaint.getTypeface();
         Typeface plain = ResourcesCompat.getFont(getContext(), R.font.roboto);
@@ -225,14 +213,17 @@ public class CustomChartBMIResult extends View {
 
         Rect bounds = new Rect();
         mTextPaint.getTextBounds(text, 0, text.length(), bounds);
-        int width = bounds.width();
+        float width = mTextPaint.measureText(text);
         int height = bounds.height();
 
-        CharSequence str = TextUtils.ellipsize(text,
-                (TextPaint) mTextPaint, getWidth(),
-                TextUtils.TruncateAt.END);
-        canvas.drawText(str, 0, str.length(), x - width / 2f, y + height, mTextPaint);
-        mTextPaint.setTextSize(curentSize);
+        if ((x - width / 2f) < 0) {
+            canvas.drawText(text, 0, text.length(), 0, y + height, mTextPaint);
+        } else if ((x + width / 2f) > widthView) {
+            canvas.drawText(text, widthView - width, y + height, mTextPaint);
+        } else {
+            canvas.drawText(text, 0, text.length(), x - width / 2f, y + height, mTextPaint);
+        }
+        mTextPaint.setTextSize(currentSize);
         mTextPaint.setColor(currentColor);
         mTextPaint.setFakeBoldText(false);
         mTextPaint.setTypeface(currentTypeface);
@@ -242,19 +233,17 @@ public class CustomChartBMIResult extends View {
         Rect bounds = new Rect();
         mTextPaint.getTextBounds(String.valueOf(listBeakScore[0]), 0, String.valueOf(listBeakScore[0]).length(), bounds);
         int height = bounds.height();
-
-        int y = (heightView / 5) * 3 + height + height / 2;
+        int y = (heightView / 4) * 3 + height + height / 2;
         int d = widthView / 4;
-        int distanmin = widthView / 8;
         for (int i = 1; i < 4; i++) {
             drawTextCenterPostittionX(canvas, i * d, y, String.valueOf(listBeakScore[i - 1]));
         }
-        int index = 1;
+        /*int index = 1;
         for (int i = 1; i <= 4; i++) {
             drawTextCenterPostittionXCustomSize(canvas, index * distanmin, (heightView - height / 10), listDescribe[i - 1], sizeText);
             index += 2;
             drawCicleAndTextPosWithColor(canvas, (i - 1) * d, (heightView - height / 10), listColor[i - 1]);
-        }
+        }*/
     }
 
     public void drawTriangleWithColor(Canvas canvas, int color, int y, int width) {
@@ -263,19 +252,27 @@ public class CustomChartBMIResult extends View {
         int XtriAngler = d;
         if (scoreBMI < 18.5) {
             colorTriangle = listColor[0];
+            XtriAngler = (int) ((scoreBMI * (2 * d)) / 18.5f);
+            if (((XtriAngler - width) < 0)) {
+                XtriAngler = width;
+            }
         }
         if (scoreBMI >= 18.5 && scoreBMI < 25) {
-            XtriAngler = d * 3;
+            XtriAngler = (int) (2 * d + ((scoreBMI - 18.5) * (2 * d) / 6.5f));
             colorTriangle = listColor[1];
         }
         if (scoreBMI >= 25 && scoreBMI <= 30) {
-            XtriAngler = d * 5;
+            XtriAngler = (int) (4 * d + ((scoreBMI - 25) * (2 * d)) / 5f);
             colorTriangle = listColor[2];
         }
         if (scoreBMI > 30) {
-            XtriAngler = d * 7;
+            XtriAngler = (int) (3 * (widthView / 4f) + ((scoreBMI - 30) * (2 * d)) / 5f);
             colorTriangle = listColor[3];
+            if (((XtriAngler + width) > widthView)) {
+                XtriAngler = widthView - width;
+            }
         }
+
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(color);
         int halfWidth = width / 2;
@@ -289,8 +286,17 @@ public class CustomChartBMIResult extends View {
         mPaint.setColor(colorTriangle);
         canvas.drawPath(path, mPaint);
         // draw Score BMI
-        @SuppressLint("DefaultLocale") String scoreString = String.format("%.02f", scoreBMI).replace(',', '.');
-        drawTextCenterPostittionCustom(canvas, XtriAngler, 0, scoreString, sizeText * 2f, colorTriangle);
+        drawTextCenterPostittionCustom(canvas, XtriAngler, 0, ConvertFloatToString(scoreBMI), sizeText * 3f, colorTriangle);
     }
 
+    public String ConvertFloatToString(float number) {
+        int frontDot = (int) number;
+        float afterDot = number - frontDot;
+        if (afterDot == 0) {
+            return String.valueOf(frontDot);
+        } else {
+            DecimalFormat df = new DecimalFormat("#0.#");
+            return df.format(number).replace(',', '.');
+        }
+    }
 }

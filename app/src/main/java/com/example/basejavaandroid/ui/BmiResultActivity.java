@@ -49,7 +49,13 @@ public class BmiResultActivity extends BaseActivity<ActivityBmiResultBinding,Bmi
         binding.btnBackTinhBMI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                float w = Float.valueOf(binding.edtWeight.getText().toString());
+                float h = Float.valueOf(binding.edtHeight.getText().toString());
+                int posGendle = binding.spinerGender.getSelectedItemPosition();
+
+                BmiInfor bmiInfor = new BmiInfor(w, h, posGendle);
+                binding.chartBMI.setScoreBMI(bmiInfor.getScoreBMI()
+                );
             }
         });
         binding.include.ivBack.setOnClickListener(new View.OnClickListener() {

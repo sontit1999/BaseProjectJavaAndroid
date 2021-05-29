@@ -5,7 +5,9 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -18,12 +20,12 @@ import androidx.core.content.res.ResourcesCompat;
 import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.model.BmiHistoryRes;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 
 public class CustomChartHistoryBMI extends View {
     public static final float DEFAULT_TEXT_SIZE = 20;
@@ -34,12 +36,14 @@ public class CustomChartHistoryBMI extends View {
     float heightView;
     float dx, dy;
     float textSize;
-    Paint mPaint;
+    float maxScore = 0;
+    Paint mPaintColumn;
+    int yOrigin, heightTextDate;
     Paint mPaintDrawRectangleScore;
     Paint mTextPaint;
     int numberColumnRec = 0;
     String[] listDescribe = new String[]{getResources().getString(R.string.thieucan), getResources().getString(R.string.nomarl), getResources().getString(R.string.thuacan), getResources().getString(R.string.beophi)};
-    int[] listColor = new int[]{getResources().getColor(R.color.lifestyle_blue), getResources().getColor(R.color.green), getResources().getColor(R.color.yellow), getResources().getColor(R.color.red)};
+    int[] listColor = new int[]{getResources().getColor(R.color.lessweight), getResources().getColor(R.color.normalweight), getResources().getColor(R.color.moreweight), getResources().getColor(R.color.fatweight)};
     int colorLine = getResources().getColor(R.color.color_line);
 
     public CustomChartHistoryBMI(Context context) {
@@ -74,21 +78,36 @@ public class CustomChartHistoryBMI extends View {
             } else {
                 this.listHistory = listHistory.subList(0, 7);
             }
+            findMaxScore();
         }
+        // Collections.reverse(this.listHistory);
         numberColumnRec = this.listHistory.size();
         invalidate();
     }
 
+    private void findMaxScore() {
+        for (BmiHistoryRes i : listHistory) {
+            if (i.getScore() >= maxScore) {
+                maxScore = (float) i.getScore();
+            }
+        }
+    }
+
     private void initPaint() {
-        mPaint = new Paint();
-        mTextPaint = new Paint();
+        Typeface plain = ResourcesCompat.getFont(getContext(), R.font.roboto);
+
+        mPaintColumn = new Paint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setColor(colorText);
         mTextPaint.setTextSize(textSize);
 
-        mPaintDrawRectangleScore = new Paint();
+        mPaintDrawRectangleScore = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaintDrawRectangleScore.setStyle(Paint.Style.FILL);
         mPaintDrawRectangleScore.setColor(DEFAULT_COLOR_TEXT);
+
+        mTextPaint.setTypeface(plain);
+        mPaintColumn.setTypeface(plain);
+        mPaintDrawRectangleScore.setTypeface(plain);
     }
 
     @Override
@@ -103,7 +122,12 @@ public class CustomChartHistoryBMI extends View {
         } else {
             widhView = 0;
         }
-        heightView = widhView;
+        // tính height text date
+        String date = "25/05";
+        Rect bounds = new Rect();
+        mTextPaint.getTextBounds(date, 0, date.length(), bounds);
+        heightTextDate = bounds.height();
+        heightView = widhView + 2 * heightTextDate;
         setMeasuredDimension(widthSize, (int) heightView);
     }
 
@@ -113,7 +137,8 @@ public class CustomChartHistoryBMI extends View {
         widhView = getWidth();
         heightView = getHeight();
         dx = widhView / 14;
-        dy = heightView / 8;
+        dy = (widhView) / 7;
+        yOrigin = (int) (heightView - 2 * heightTextDate);
     }
 
     @Override
@@ -121,42 +146,53 @@ public class CustomChartHistoryBMI extends View {
         super.onDraw(canvas);
         drawTextScoreBMIX(canvas);
         drawTextTime(canvas);
-        drawBeakPoint(canvas);
+        //  drawBeakPoint(canvas);
     }
 
     private void drawTextScoreBMIX(Canvas canvas) {
         int numberBreakpoint = 7;
+
+        float scoreOfRange = maxScore / numberBreakpoint;
+        float indexFloat = 0f;
+
         int index = 0;
 
-        for (int i = 0; i < numberBreakpoint; i++) {
+        for (int i = 0; i <= numberBreakpoint; i++) {
             Rect bounds = new Rect();
             mTextPaint.getTextBounds(String.valueOf(index), 0, String.valueOf(index).length(), bounds);
             int width = bounds.width();
+            int height = bounds.height();
+            float yBreakPoint = (yOrigin - (index * (yOrigin / maxScore)));
             if (i == 0) {
-                drawTextCenterPostition(canvas, (int) (dx / 2 - width), (int) (heightView - (dy * (i + 1))), String.valueOf(index), true, false);
-                drawLine(canvas, (int) dx, (int) (heightView - (dy * (i + 1))), (int) widhView, (int) (heightView - (dy * (i + 1))));
+                drawTextCenterPostition(canvas, (int) (dx / 2 - width), (int) (yOrigin - i * dy), String.valueOf(index), true, false);
+                drawLine(canvas, (int) dx, (int) yBreakPoint, (int) widhView, (int) yBreakPoint);
 
-            } else if (i == numberBreakpoint - 1) {
-                drawTextCenterPostition(canvas, (int) (dx / 2 - width), (int) (heightView - (dy * (i + 1))), String.valueOf(index), true, true);
-                drawLine(canvas, (int) dx, (int) (heightView - (dy * (i + 1))), (int) widhView, (int) (heightView - (dy * (i + 1))));
+            } else if (i == numberBreakpoint) {
+                drawTextCenterPostition(canvas, (int) (dx / 2 - width), height, String.valueOf(index), true, true);
+                drawLine(canvas, (int) dx, 0, (int) widhView, 0);
             } else {
-                drawTextCenterPostition(canvas, (int) (dx / 2 - width), (int) (heightView - (dy * (i + 1))), String.valueOf(index), true, true);
-                drawLine(canvas, (int) dx, (int) (heightView - (dy * (i + 1))), (int) widhView, (int) (heightView - (dy * (i + 1))));
+                drawTextCenterPostition(canvas, (int) (dx / 2 - width), (int) yBreakPoint, String.valueOf(index), true, true);
+                drawLine(canvas, (int) dx, (int) yBreakPoint, (int) widhView, (int) yBreakPoint);
             }
-            index += 5;
+            indexFloat += scoreOfRange;
+            index = roundFloatToInt(indexFloat);
         }
+    }
+
+    public float findYofScore(float score) {
+        return (score * yOrigin) / maxScore;
     }
 
     private void drawTextTime(Canvas canvas) {
         Rect bounds = new Rect();
         mTextPaint.getTextBounds(String.valueOf(R.string.bmi), 0, 3, bounds);
         int height = bounds.height();
-        int yTime = (int) (heightView - dy / 2 - height / 2f);
+        int yTime = yOrigin + 2 * heightTextDate;
         for (int i = 1; i <= listHistory.size(); i++) {
             mTextPaint.getTextBounds(String.valueOf(listHistory.get(i - 1).getScore()), 0, String.valueOf(listHistory.get(i - 1).getScore()).length(), bounds);
             drawRectangleWithColor(canvas, (int) ((2 * i - 1) * dx), (float) listHistory.get(i - 1).getScore());
-            drawTextTime(canvas, (int) ((2 * i - 1) * dx), yTime, ConvertTimeToString(listHistory.get(i - 1).getUpdated_at()), false, false);
-            drawScoreBMI(canvas, mTextPaint, (int) ((2 * i - 1) * dx + dx / 2f), (int) (heightView - dy - dy / 2f), ConvertFloatToString((float) listHistory.get(i - 1).getScore()), textSize * 1.2f, true, Color.WHITE);
+            drawTextTime(canvas, (int) ((2 * i - 1) * dx), yTime, ConvertTimeToString(listHistory.get(i - 1).getUpdateAt()), false, false);
+            drawScoreBMI(canvas, mTextPaint, (int) ((2 * i - 1) * dx + dx / 2f), yOrigin, ConvertFloatToString((float) listHistory.get(i - 1).getScore()), textSize * 1.2f, false, Color.WHITE);
         }
 
     }
@@ -166,28 +202,28 @@ public class CustomChartHistoryBMI extends View {
         float afterDot = number - frontDot;
         if (afterDot == 0) {
             return String.valueOf(frontDot);
+        } else {
+            DecimalFormat df = new DecimalFormat("#0.#");
+            return df.format(number).replace(',', '.');
         }
-        return String.format("%.1f", number).replace(',', '.');
     }
 
-    public void drawBeakPoint(Canvas canvas) {
-        int yDescribe = (int) (heightView - dy / 4f);
-        int d = (int) (widhView / 4f);
-        Rect bounds = new Rect();
-        mTextPaint.getTextBounds(String.valueOf(R.string.thieucan), 0, 1, bounds);
-        int height = bounds.height();
-        for (int i = 0; i < 4; i++) {
-            drawCirclePosWithColor(canvas, (int) ((i) * d + (dy / 2f)), yDescribe, listColor[i]);
-            drawTextCenterPostition(canvas, (int) ((i) * d + (dy / 2f)) + (int) (dy / 5), (int) (yDescribe + height / 2f), listDescribe[i], false, false);
+    public int roundFloatToInt(float num) {
+        int font = (int) num;
+        float affter = num - font;
+        if (affter < 0.5) {
+            return font;
+        } else {
+            return font + 1;
         }
     }
 
     public void drawCirclePosWithColor(Canvas canvas, int x, int y, int color) {
-        int currentColor = mPaint.getColor();
-        mPaint.setColor(color);
+        int currentColor = mPaintColumn.getColor();
+        mPaintColumn.setColor(color);
         int radiusCircle = (int) (dy / 10);
-        canvas.drawCircle(x, y, radiusCircle, mPaint);
-        mPaint.setColor(currentColor);
+        canvas.drawCircle(x, y, radiusCircle, mPaintColumn);
+        mPaintColumn.setColor(currentColor);
 
     }
 
@@ -206,12 +242,13 @@ public class CustomChartHistoryBMI extends View {
         if (scoreBMI >= 30) {
             colorRec = listColor[3];
         }
-        float heightRectangle = (scoreBMI * dy) / 5f;
+        float heightRectangle = (scoreBMI * yOrigin) / maxScore;
         // fill
         mPaintDrawRectangleScore.setStyle(Paint.Style.FILL);
         mPaintDrawRectangleScore.setColor(colorRec);
-        Rect rect = new Rect(left, (int) ((heightView - dy - heightRectangle)), (int) (left + dx), (int) (heightView - dy));
-        canvas.drawRect(rect, mPaintDrawRectangleScore);
+        Rect rect = new Rect(left, (int) ((yOrigin - heightRectangle)), (int) (left + dx), yOrigin);
+        drawRectangleWithColorAndBoderRadius(canvas, colorRec, rect);
+        // canvas.drawRect(rect, mPaintDrawRectangleScore);
         mPaintDrawRectangleScore.setColor(currentColor);
     }
 
@@ -230,12 +267,11 @@ public class CustomChartHistoryBMI extends View {
         CharSequence str = TextUtils.ellipsize(text,
                 (TextPaint) mTextPaint, getWidth(),
                 TextUtils.TruncateAt.END);
-        Typeface plain = ResourcesCompat.getFont(getContext(), R.font.montserrat_bold);
-        mTextPaint.setTypeface(plain);
-        canvas.drawText(str, 0, str.length(), x - width / 2f, y + height / 2f, mTextPaint);
+
+        canvas.drawText(str, 0, str.length(), x - width / 2, y - height, mTextPaint);
         mTextPaint.setTextSize(currentSize);
         mTextPaint.setColor(currentColor);
-        mTextPaint.setTypeface(ResourcesCompat.getFont(getContext(), R.font.montserrat_regular));
+
     }
 
     public void drawTextCenterPostition(Canvas canvas, int x, int y, String text, boolean isCenterX, boolean isCenterY) {
@@ -300,21 +336,37 @@ public class CustomChartHistoryBMI extends View {
         mTextPaint.setFakeBoldText(false);
     }
 
+    public void drawRectangleWithColorAndBoderRadius(Canvas canvas, int color, Rect rect) {
+        mPaintColumn.setStyle(Paint.Style.FILL);
+        mPaintColumn.setColor(color);
+        //draw rectange boder radius
+        float boderRadius = (rect.right - rect.left) / 2f;
+        float[] cornersTop = new float[]{
+                boderRadius, boderRadius,        // Top left radius in px
+                boderRadius, boderRadius,    // Top right radius in px
+                0, 0,          // Bottom right radius in px
+                0, 0           // Bottom left radius in px
+        };
+        final Path path = new Path();
+        path.addRoundRect(new RectF(rect.left, rect.top, rect.right, rect.bottom), cornersTop, Path.Direction.CW);
+        canvas.drawPath(path, mPaintColumn);
+    }
+
     public void drawText(Canvas canvas, int x, int y, String text) {
         canvas.drawText(text, x, y, mTextPaint);
     }
 
     public void drawLine(Canvas canvas, int startX, int startY, int endX, int endY) {
-        mPaint.setAlpha((int) (0.5f * 255));
-        int currentColor = mPaint.getColor();
-        mPaint.setColor(colorLine);
-        canvas.drawLine(startX, startY, endX, endY, mPaint);
-        mPaint.setAlpha(255);
-        mPaint.setColor(currentColor);
+        mPaintColumn.setAlpha((int) (0.5f * 255));
+        int currentColor = mPaintColumn.getColor();
+        mPaintColumn.setColor(colorLine);
+        canvas.drawLine(startX, startY, endX, endY, mPaintColumn);
+        mPaintColumn.setAlpha(255);
+        mPaintColumn.setColor(currentColor);
     }
 
     public String ConvertTimeToString(String time) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("đ/MM/yyyy");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM");
         Date date = null;
         try {

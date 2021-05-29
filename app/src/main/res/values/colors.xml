@@ -30,4 +30,9 @@
     <color name="colorNumberBMI">#474747</color>
     <color name="colorBackgroundHomeHealth">#E5E5E5</color>
     <color name="color_line">#F0F0F0</color>
+    <color name="blue">#00BCD4</color>
+    <color name="lessweight">#2196F3</color>
+    <color name="normalweight">#00BCD4</color>
+    <color name="moreweight">#FF9800</color>
+    <color name="fatweight">#E93427</color>
 </resources>
