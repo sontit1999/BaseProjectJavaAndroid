@@ -1,8 +1,11 @@
 package com.example.basejavaandroid.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.adapter.GenderAdapter;
@@ -64,6 +67,15 @@ public class BmiResultActivity extends BaseActivity<ActivityBmiResultBinding,Bmi
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override

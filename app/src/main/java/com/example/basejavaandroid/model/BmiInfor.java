@@ -1,16 +1,17 @@
 package com.example.basejavaandroid.model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class BmiInfor implements Serializable {
     private float w;
     private float h;
     private int posGendle;
-    private float scoreBMI;
+    private final float scoreBMI;
 
     public float getScoreBMI() {
         float hMet = h/100;
-        return w/(hMet*hMet);
+        return Float.parseFloat(new DecimalFormat("#.#").format(w / (hMet * hMet)).replace(',', '.'));
     }
     public BmiInfor(float w, float h, int posGendle) {
         this.w = w;

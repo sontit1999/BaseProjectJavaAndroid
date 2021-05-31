@@ -42,7 +42,6 @@ public class CustomChartHistoryBMI extends View {
     Paint mPaintDrawRectangleScore;
     Paint mTextPaint;
     int numberColumnRec = 0;
-    String[] listDescribe = new String[]{getResources().getString(R.string.thieucan), getResources().getString(R.string.nomarl), getResources().getString(R.string.thuacan), getResources().getString(R.string.beophi)};
     int[] listColor = new int[]{getResources().getColor(R.color.lessweight), getResources().getColor(R.color.normalweight), getResources().getColor(R.color.moreweight), getResources().getColor(R.color.fatweight)};
     int colorLine = getResources().getColor(R.color.color_line);
 
@@ -179,10 +178,6 @@ public class CustomChartHistoryBMI extends View {
         }
     }
 
-    public float findYofScore(float score) {
-        return (score * yOrigin) / maxScore;
-    }
-
     private void drawTextTime(Canvas canvas) {
         Rect bounds = new Rect();
         mTextPaint.getTextBounds(String.valueOf(R.string.bmi), 0, 3, bounds);
@@ -218,14 +213,7 @@ public class CustomChartHistoryBMI extends View {
         }
     }
 
-    public void drawCirclePosWithColor(Canvas canvas, int x, int y, int color) {
-        int currentColor = mPaintColumn.getColor();
-        mPaintColumn.setColor(color);
-        int radiusCircle = (int) (dy / 10);
-        canvas.drawCircle(x, y, radiusCircle, mPaintColumn);
-        mPaintColumn.setColor(currentColor);
 
-    }
 
     public void drawRectangleWithColor(Canvas canvas, int left, float scoreBMI) {
         int currentColor = mPaintDrawRectangleScore.getColor();
