@@ -10,58 +10,24 @@
         android:layout_height="match_parent"
         tools:context=".ui.BmiActivity">
 
-        <TextView
-            android:id="@+id/tvCommon"
-            android:layout_width="wrap_content"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_height="wrap_content"
-            android:text="Sự kiện chung"
-            android:textColor="#B60081"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/incaditorCommonEvent"
-            app:layout_constraintStart_toStartOf="@id/incaditorCommonEvent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="@color/fatweight"
+            app:tabIndicatorHeight="3dp"
+            android:layout_width="match_parent"
+            app:tabSelectedTextColor="@color/fatweight" />
 
-        <View
-            android:id="@+id/incaditorCommonEvent"
-            android:layout_width="0dp"
-            android:layout_height="2px"
-            android:layout_marginTop="4dp"
-            android:background="#B60081"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCommon"
-            app:layout_constraintWidth_percent="0.5" />
-
-        <TextView
-            android:id="@+id/tvSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sự đã lưu"
-            android:textColor="#BCBCBC"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/incaditorSaveEvent"
-            app:layout_constraintStart_toStartOf="@id/incaditorSaveEvent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/incaditorSaveEvent"
-            android:layout_width="0dp"
-            android:layout_height="2px"
-            android:layout_marginTop="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCommon"
-            app:layout_constraintWidth_percent="0.5" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvEvent"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/incaditorSaveEvent">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toBottomOf="@id/tabLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

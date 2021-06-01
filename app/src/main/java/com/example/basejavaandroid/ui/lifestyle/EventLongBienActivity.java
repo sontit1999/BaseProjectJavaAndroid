@@ -1,36 +1,34 @@
 package com.example.basejavaandroid.ui.lifestyle;
 
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.base.BaseActivity;
 import com.example.basejavaandroid.databinding.ActivityEventLongbienBinding;
-import com.example.basejavaandroid.model.Event;
-
-import java.util.ArrayList;
+import com.example.basejavaandroid.ui.lifestyle.fragment.EventCommonFragment;
+import com.example.basejavaandroid.ui.lifestyle.fragment.ViewPagerAdapter;
 
 public class EventLongBienActivity extends BaseActivity<ActivityEventLongbienBinding, EventLongBienViewModel> {
+    ViewPagerAdapter viewPagerAdapter;
+
     @Override
     protected void getData() {
-        viewmodel.arrEvent.observe(this, new Observer<ArrayList<Event>>() {
-            @Override
-            public void onChanged(ArrayList<Event> events) {
-                viewmodel.eventLongBienAdapter.setListEvent(events);
-            }
-        });
+        setupViewPagerAndTablayout();
+    }
+
+    private void setupViewPagerAndTablayout() {
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(new EventCommonFragment(EventCommonFragment.TYPE_COMMON), "Sự kiện chung");
+        viewPagerAdapter.addFragment(new EventCommonFragment(EventCommonFragment.TYPE_BOOKMARK), "Sự kiện đã lưu");
+        binding.viewpager.setAdapter(viewPagerAdapter);
+        binding.tabLayout.setupWithViewPager(binding.viewpager);
     }
 
     @Override
     protected void initEvent() {
-        initRecyclerView();
-        viewmodel.loadEvent();
+
     }
 
     private void initRecyclerView() {
-        binding.rvEvent.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        binding.rvEvent.setAdapter(viewmodel.eventLongBienAdapter);
+
     }
 
     @Override

@@ -18,7 +18,7 @@ public abstract class BaseFragment<B extends ViewDataBinding,VM extends BaseView
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewmodel = ViewModelProviders.of(getActivity()).get(getViewModel());
+        viewmodel = ViewModelProviders.of(this).get(getViewModel());
     }
 
     @Nullable
