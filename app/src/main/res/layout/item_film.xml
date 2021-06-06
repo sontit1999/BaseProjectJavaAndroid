@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-                  name="film"
-                  type="com.example.basejavaandroid.Film" />
-        <variable
-            name="callback"
-            type="com.example.basejavaandroid.FilmCallback" />
-    </data>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -19,11 +9,6 @@
         app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:onClick="@{()->callback.onClickFilm(film)}"
-            xmlns:tools="http://schemas.android.com/tools"
-            onLongClickView="@{()->callback.onLongClick(film)}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -32,11 +17,26 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="5dp"
+                android:src="@drawable/tenant"
                 android:scaleType="centerCrop"
-                bind:imageUrl="@{film.linkImage}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTimeLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/boder_timeleft"
+                android:padding="5dp"
+                android:text="12:10:20:30"
+                android:textColor="@color/white"
+                android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +56,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="@{film.name}"
                 android:textColor="#090909"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +68,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:maxLines="1"
-                android:text='@{"Time:" +  film.duration + "h"}'
                 app:layout_constraintEnd_toEndOf="@+id/tvName"
                 app:layout_constraintStart_toStartOf="@+id/tvName"
                 app:layout_constraintTop_toBottomOf="@+id/tvName" />
@@ -80,7 +78,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:maxLines="3"
-                android:text="@{film.description}"
                 app:layout_constraintEnd_toEndOf="@+id/tvTime"
                 app:layout_constraintStart_toStartOf="@+id/tvTime"
                 app:layout_constraintTop_toBottomOf="@+id/tvTime" />

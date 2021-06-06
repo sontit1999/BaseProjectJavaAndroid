@@ -14,11 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BaseJavaAndroid">
+        <activity android:name=".ui.lifestyle.keepstate.KeepStateTabActivity"></activity>
         <activity android:name=".ui.mallclub.HomeFanClubActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".TestProfileCollapsingActivity"></activity>
-        <activity android:name=".ui.MyProfileHelthActivity"></activity>
+        <activity android:name=".TestProfileCollapsingActivity" />
+        <activity android:name=".ui.MyProfileHelthActivity" />
         <activity android:name=".ui.lifestyle.EventLongBienActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,11 +32,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.HelthProfileActivity">
-            <!-- <intent-filter>
+
+            <!--
+             <intent-filter>
                  <action android:name="android.intent.action.MAIN" />
 
                  <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>-->
+             </intent-filter>
+            -->
         </activity>
         <activity android:name=".ui.BmiHistoryActivity" />
         <activity android:name=".ui.BmiActivity" />
@@ -40,7 +48,7 @@
         <activity android:name=".BookingActivity" />
         <activity android:name=".CustomActivity" />
         <activity android:name=".DetailActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <service
             android:name=".service.MyFirebaseMessagingService"

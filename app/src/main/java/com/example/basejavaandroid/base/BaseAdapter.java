@@ -1,7 +1,6 @@
 package com.example.basejavaandroid.base;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -24,8 +23,6 @@ public abstract class BaseAdapter<T , B extends ViewDataBinding> extends Recycle
         notifyDataSetChanged();
     }
     public void removeItem(T item){
-
-
         if(dataList!=null && dataList.size()>0){
             int index = dataList.indexOf(item);
             if(index>0){
@@ -115,7 +112,7 @@ public abstract class BaseAdapter<T , B extends ViewDataBinding> extends Recycle
         }
     }
     class ViewHolder<T,VB extends ViewDataBinding> extends RecyclerView.ViewHolder{
-        private VB binding;
+        private final VB binding;
         public ViewHolder(@NonNull VB binding) {
             super(binding.getRoot());
             this.binding = binding;

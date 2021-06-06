@@ -60,70 +60,55 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
         <TextView
             android:id="@+id/tvReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:text="Mall Fanclub Review"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sizeTitle"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/guildlineVertical"
-            app:layout_constraintTop_toBottomOf="@+id/ivHand" />
-
-        <View
-            android:id="@+id/viewReview"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/boder_line"
-            app:layout_constraintEnd_toEndOf="@id/tvReview"
-            app:layout_constraintStart_toStartOf="@id/tvReview"
-            app:layout_constraintTop_toBottomOf="@id/tvReview" />
+            android:text="Fanclub Review"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivHand" />
 
         <TextView
             android:id="@+id/tvMyReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:text="Review của tôi"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sizeTitle"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/guildlineVertical"
-            app:layout_constraintTop_toBottomOf="@+id/ivHand" />
+            android:text="My Review"
+            app:layout_constraintBottom_toBottomOf="@id/tvReview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@id/tvReview" />
 
-        <View
-            android:id="@+id/viewMyReview"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/boder_line"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@id/tvMyReview"
-            app:layout_constraintStart_toStartOf="@id/tvMyReview"
-            app:layout_constraintTop_toBottomOf="@id/tvMyReview" />
-
-        <androidx.cardview.widget.CardView
+        <com.example.basejavaandroid.customview.CustomViewPager
+            android:id="@+id/viewpagerReview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_viewpager"
-            app:cardCornerRadius="15dp"
-            app:cardPreventCornerOverlap="true"
+            android:layout_marginTop="15dp"
+            android:background="@color/white"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewMyReview">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvReview" />
 
-            <FrameLayout
-                android:id="@+id/containerFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp" />
-        </androidx.cardview.widget.CardView>
+        <ImageButton
+            android:id="@+id/floatingAdd"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@null"
+            android:src="@drawable/add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

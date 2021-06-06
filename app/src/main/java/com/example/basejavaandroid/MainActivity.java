@@ -1,4 +1,4 @@
- package com.example.basejavaandroid;
+package com.example.basejavaandroid;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -70,20 +69,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewmode
         viewmodel.getArrFilm().observe(this, new Observer<List<Film>>() {
             @Override
             public void onChanged(List<Film> films) {
-                viewmodel.filmAdapter.setList(films);
-                viewmodel.filmAdapter.setCallback(new FilmCallback() {
-                    @Override
-                    public void onClickFilm(Film film) {
-                        Intent intents = new Intent(MainActivity.this, DetailActivity.class);
-                        intents.putExtra(FILM_KEY,film);
-                        startActivity(intents);
-                    }
 
-                    @Override
-                    public void onLongClick(Film film) {
-                        showAlertDialogDeleteFilm(film);
-                    }
-                });
             }
         });
     }
@@ -101,7 +87,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewmode
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // xoa film
-                        viewmodel.filmAdapter.removeItem(film);
                     }
                 })
         //set negative button
@@ -150,20 +135,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewmode
     }
 
     private void getMoreData() {
-        if(!isLoading){
+        if(!isLoading) {
             isLoading = true;
 
 
             // get data from server
-            List<Film> arrFilm = new ArrayList<>();
-            arrFilm.add(new Film(7,"Bản Năng Hoang Dại - Voyagers","https://i2.wp.com/motphimle.com/wp-content/uploads/2021/04/Ban-Nang-Hoang-Dai-Voyagers-2021-poster.jpg?fit=600%2C887&ssl=1",1,"Phim nói về tương lai không xa khi nhân loại đang trên bờ vực diệt chủng, một nhóm thanh thiếu niên được nuôi dưỡng để phục vụ cho mục đích khai thác trí tuệ và chấp nhận sai khiến. Họ bắt đầu một chuyến hành trình thám hiểm khai phá một hành tinh xa xôi khác."));
-            arrFilm.add(new Film(8,"Bàn Tay Diệt Quỷ - Evil Expeller ","https://www.cgv.vn/media/catalog/product/cache/1/image/c5f0a1eff4c394a251036189ccddaacd/b/t/btdq_main_poster.jpg",2,"Phim nói về võ sĩ sau khi bản thân bỗng nhiên sở hữu “Bàn tay diệt quỷ”, nên võ sĩ MMA Yong Hoo (Park Seo Joon thủ vai) đã dấn thân vào hành trình trừ tà, trục quỷ đối đầu với Giám Mục Bóng Tối (Woo Do Hwan) – tên quỷ Satan đột lốt người."));
-            arrFilm.add(new Film(9,"Lật Mặt: 48h","https://media-cdn.laodong.vn/Storage/NewsPortal/2021/4/19/900413/8-1.jpg?w=414&h=276&crop=auto&scale=both",4,"Câu chuyện xoay quanh hành trình trốn chạy bọn xã hội đen của gia đình anh Hiền - một võ sư có xuất thân là tay đấm bốc trong quá khứ. Vì cần một số tiền lớn, anh đã vô tình lọt vào cái bẫy của bọn người xấu nhưng may mắn thoát được. "));
-            arrFilm.add(new Film(10,"Trùm Cuối Siêu Đẳng - Boss Level","https://cdnmedia.thethaovanhoa.vn/Upload/3uPkfvAxvuOpUQrmKeiDaA/files/2021/04/B/18/Trum-cuoitop.jpg",3.5f,"Phim nói về sự mắc kẹt trong một vòng lặp thời gian ngay đúng ngày anh ta bị giết chết, một cựu đặc vụ Roy Pulver (Frank Gillo) đã phát hiện ra manh mới về một dự án bí mật của chính phủ có thể giải đáp bí ẩn đằng sau cái chết vô thời hạn của anh ta."));
+            List<Film> list = new ArrayList<>();
+            list.add(new Film(1, "Bố già", "https://cdn.tgdd.vn/Files/2020/07/01/1266904/top-phim-chieu-rap-hay-nhat-2020-tich-tien-28.jpg", 2, "Bộ phim xoay quanh về gia đình nhỏ của Ba Sang và Quắn, sống trong một khu xóm lao động nghèo. Ba Sang là một người hay lo chuyện bao đồng, luôn yêu thương con trai nhưng khoảng cách giữa những thế hệ đã khiến cho cả hay xảy ra nhiều mâu thuẫn", "09:00:00 08/5/2021"));
+            list.add(new Film(2, "Godzilla Đại Chiến Kong", "https://www.fullphim.net/static/5fe2d564b3fa6403ffa11d1c/6061eb3d14fcbf485386b98a_godzilla-kong-2.jpg", 3, "Hai kẻ thù truyền kiếp Kong và Godzilla sẽ chạm trán trong một trận chiến thế kỉ. Kong và các đồng đội cùng với Jia là một cô gái trẻ mồ côi, sẽ dấn thân vào cuộc thám hiểm đầy hiểm nguy mong tìm ra được ngôi nhà thật sự của mình.", "09:08:08 09/5/2021"));
+            list.add(new Film(3, "Song Song", "https://cdn.tgdd.vn/Files/2020/07/01/1266904/top-phim-chieu-rap-hay-nhat-2020-tich-tien-30.jpg", 1, "Vào một đêm mưa bão, Phong (Thuận Phát) đã vô tình chứng kiến cảnh ông Sơn (Tiến Luật) hàng xóm đang cố gắng di chuyển một xác chết. Vì quá sợ hãi, Phong chạy ra khỏi nhà nhưng đã bị xe tải tông chết ngay tại chỗ trước sự bất lực của ông Sơn. Liệu mọi chuyện sẽ diễn ra như thế nào? Mời bạn theo dõi phim để có câu trả lời.", "04:15:20 010/6/2021"));
+            list.add(new Film(4, "Siêu Trộm - Way Down", "https://media.voocdn.com/media/image/id/6065776aacc399e5ba8b45d7", 2.5f, "Nhà thám hiểm đại dương Walter Moeland vừa thành công trong việc trục vớt một xác tàu đắm thuộc vùng biển Tây Ban Nha, đồng thời tìm được 3 đồng xu vàng được cho là dẫn đến kho báu “bất tận” được chôn giấu của huyền thoại Sir Francis Drake.", "20:00:05 10/5/2021"));
+            list.add(new Film(5, "Cô Gái Trẻ Hứa Hẹn - Promising Young Woman", "https://lh3.googleusercontent.com/proxy/xvlZV6hnejy2d_eLrT1m7tVMErfANW4rcfuXDdzRTcvOTNo9oOyNQ0n4aqxe1Gj0QuByhLLnevilkvhrux-evLz-x3IlQADl46uG_u-oE1O1fJTCaTD9A2YAf3MjepOq-CLKrg", 2.5f, "Trước vụ việc người bạn thân nhất Nina Fisher bị tấn công tình dục và rồi tự sát vì không tìm thấy công lý, Cassandra Cassie Thomas đã gặp phải tổn thương tâm lý nặng nề và bỏ học. Giờ đây, Cassie 30 tuổi lang thang giữa các hộp đêm Ohio, đóng giả làm một “con mồi béo bở” đang say khướt để mời gọi và dạy dỗ những chàng trai ngây ngô hư hỏng.", "15:15:05 7/5/2021"));
+            list.add(new Film(6, "Kiều", "https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/4/7/1614643553076225740302655401821542371023678n-1617813417946909536602.jpg", 3, "Bộ phim dựa trên tác phẩm văn học kinh điển cùng tên của đại thi hào Nguyễn Du. Chỉ khi vừa tung ra đoạn trailer ngắn, Kiều đã khiến không ít khán giả phải tò mò và mong chờ. Liệu Kiều trên màn ảnh có thu hút được khán giả không? Mời bạn cùng ra rạp để có được câu trả lời chính xác nhất", "07:00:05 12/5/2021"));
 
-            int oldCount = viewmodel.filmAdapter.getList().size();
-            viewmodel.filmAdapter.addMore(arrFilm);
-            isLoading = false;
         }
     }
 
