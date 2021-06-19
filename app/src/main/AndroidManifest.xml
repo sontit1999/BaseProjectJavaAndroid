@@ -15,15 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BaseJavaAndroid">
         <activity android:name=".ui.mallclub.addreview.AddReivewActivity">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity android:name=".ui.lifestyle.keepstate.KeepStateTabActivity" />
+        <activity android:name=".ui.mallclub.HomeFanClubActivity">
+
+        </activity>
+        <activity android:name=".ui.lifestyle.loadmore.LoadmoreTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".ui.lifestyle.keepstate.KeepStateTabActivity" />
-        <activity android:name=".ui.mallclub.HomeFanClubActivity">
-
         </activity>
         <activity android:name=".TestProfileCollapsingActivity" />
         <activity android:name=".ui.MyProfileHelthActivity" />
