@@ -4,14 +4,57 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.basejavaandroid.R;
+import com.example.basejavaandroid.adapter.NumberAdapter;
 import com.example.basejavaandroid.base.BaseActivity;
 import com.example.basejavaandroid.databinding.ActivityLoadmoreBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-public class LoadmoreTestActivity extends BaseActivity<ActivityLoadmoreBinding, LoadMoreViewModel> {
+import org.jetbrains.annotations.NotNull;
+
+public class LoadmoreTestActivity extends BaseActivity<ActivityLoadmoreBinding, LoadMoreViewModel> implements NumberAdapter.numberCallBack {
+    NumberAdapter numberAdapter;
+
     @Override
     protected void getData() {
+        numberAdapter = new NumberAdapter(this, viewmodel.mListNumber);
+        binding.rvNumber.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        binding.rvNumber.setAdapter(numberAdapter);
+
+        binding.rvNumber.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int lastVisible = layoutManager.findLastVisibleItemPosition();
+                if (!viewmodel.isLoadMore && lastVisible == numberAdapter.getItemCount() - 1) {
+                    viewmodel.isLoadMore = true;
+                    viewmodel.mListNumber.add(null);
+                    numberAdapter.notifyItemInserted(viewmodel.mListNumber.size() - 1);
+                    viewmodel.getMoreNumber();
+                }
+            }
+        });
+
+        viewmodel.actionState.observe(this, new Observer<LoadMoreViewModel.ActionLoadMore>() {
+            @Override
+            public void onChanged(LoadMoreViewModel.ActionLoadMore actionLoadMore) {
+                if (actionLoadMore instanceof LoadMoreViewModel.ActionLoadMore.DataChange) {
+                    numberAdapter.notifyDataSetChanged();
+                }
+                if (actionLoadMore instanceof LoadMoreViewModel.ActionLoadMore.DataLoadmoreSuccess) {
+                    viewmodel.mListNumber.remove(viewmodel.mListNumber.size() - 1);
+                    numberAdapter.notifyItemRemoved(viewmodel.mListNumber.size());
+                }
+                if (actionLoadMore instanceof LoadMoreViewModel.ActionLoadMore.DataInsert) {
+                    numberAdapter.notifyItemRangeInserted(viewmodel.mListNumber.size() - ((LoadMoreViewModel.ActionLoadMore.DataInsert) actionLoadMore).count, viewmodel.mListNumber.size() - 1);
+                }
+            }
+        });
 
     }
 
@@ -77,5 +120,10 @@ public class LoadmoreTestActivity extends BaseActivity<ActivityLoadmoreBinding, 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_loadmore;
+    }
+
+    @Override
+    public void onClickNumber(int pos) {
+        Toast.makeText(this, "CLick " + viewmodel.mListNumber.get(pos).getNumber() + "", Toast.LENGTH_SHORT).show();
     }
 }

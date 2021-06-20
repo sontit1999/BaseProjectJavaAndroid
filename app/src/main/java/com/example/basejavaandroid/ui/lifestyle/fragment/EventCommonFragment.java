@@ -1,11 +1,14 @@
 package com.example.basejavaandroid.ui.lifestyle.fragment;
 
 import android.graphics.Color;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.basejavaandroid.Film;
 import com.example.basejavaandroid.FilmCallback;
@@ -15,6 +18,8 @@ import com.example.basejavaandroid.base.BaseFragment;
 import com.example.basejavaandroid.databinding.FragEventCommonBinding;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class EventCommonFragment extends BaseFragment<FragEventCommonBinding, EventCommonViewmodel> {
     public static final int TYPE_COMMON = 1;
@@ -41,15 +46,46 @@ public class EventCommonFragment extends BaseFragment<FragEventCommonBinding, Ev
             binding.container.setBackgroundColor(Color.GREEN);
         }
         initRecyclerView();
-        viewmodel.arrFilm.observe(this, films -> {
-            int currentSize = viewmodel.listFilm.size();
-            viewmodel.listFilm.addAll(films);
-            filmsAdapter.notifyItemRangeInserted(currentSize, films.size());
+        viewmodel.actionState.observe(this, new Observer<EventCommonViewmodel.ActionFilms>() {
+            @Override
+            public void onChanged(EventCommonViewmodel.ActionFilms actionFilms) {
+                if (actionFilms instanceof EventCommonViewmodel.ActionFilms.DataChange) {
+                    filmsAdapter.notifyDataSetChanged();
+                }
+                if (actionFilms instanceof EventCommonViewmodel.ActionFilms.DataLoadmoreSuccess) {
+                    viewmodel.arrFilm.remove(viewmodel.arrFilm.size() - 1);
+                    filmsAdapter.notifyItemRemoved(viewmodel.arrFilm.size());
+                }
+                if (actionFilms instanceof EventCommonViewmodel.ActionFilms.DataLoaded) {
+                    viewmodel.arrFilm.remove(viewmodel.arrFilm.size() - 1);
+                    filmsAdapter.notifyItemRemoved(viewmodel.arrFilm.size());
+                    Toast.makeText(getActivity(), "HẾt data rùi !!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        viewmodel.isLoading.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    binding.progressbar.setVisibility(View.VISIBLE);
+                } else {
+                    binding.progressbar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        binding.swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                binding.swiperefresh.setEnabled(false);
+                viewmodel.doLoadFilm();
+            }
         });
     }
 
     private void initRecyclerView() {
-        filmsAdapter = new FilmsAdapter(viewmodel.listFilm);
+        filmsAdapter = new FilmsAdapter((ArrayList<Film>) viewmodel.arrFilm);
         filmsAdapter.setCallback(new FilmCallback() {
             @Override
             public void onClickFilm(Film film) {
@@ -73,11 +109,13 @@ public class EventCommonFragment extends BaseFragment<FragEventCommonBinding, Ev
             @Override
             public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                /*LinearLayoutManager layoutManager = (LinearLayoutManager) binding.rvFilms.getLayoutManager();
-                if (layoutManager.findLastVisibleItemPosition() + 2 >= binding.rvFilms.getAdapter().getItemCount()) {
-                    viewmodel.isLoading.setValue(true);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) binding.rvFilms.getLayoutManager();
+                if (!viewmodel.isloadMore && layoutManager.findLastVisibleItemPosition() == filmsAdapter.getItemCount() - 1) {
+                    viewmodel.isloadMore = true;
+                    viewmodel.arrFilm.add(null);
+                    filmsAdapter.notifyItemInserted(viewmodel.arrFilm.size() - 1);
                     viewmodel.loadMoreFilm();
-                }*/
+                }
 
             }
         });

@@ -20,7 +20,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.MyHolder> {
+public class FilmsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public static final int TYPE_LOADING = 1;
+    public static final int TYPE_FILMS = 2;
+
     FilmCallback callback;
     ArrayList<Film> listFilm;
     LayoutInflater layoutInflater;
@@ -34,25 +37,36 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.MyHolder> {
         this.callback = callback;
     }
 
-    @NonNull
+
     @NotNull
     @Override
-    public MyHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
-        return new MyHolder(DataBindingUtil.inflate(layoutInflater, R.layout.item_film, parent, false));
+        if (viewType == TYPE_FILMS) {
+            return new MyHolder(DataBindingUtil.inflate(layoutInflater, R.layout.item_film, parent, false));
+        } else {
+            return new LoadingHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false));
+        }
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull FilmsAdapter.MyHolder holder, int position) {
-        Film film = listFilm.get(position);
-        holder.binData(film);
+    public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof MyHolder) {
+            ((MyHolder) holder).binData(listFilm.get(position));
+        }
     }
 
     @Override
     public int getItemCount() {
         return listFilm.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return listFilm.get(position) == null ? TYPE_LOADING : TYPE_FILMS;
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
@@ -110,6 +124,12 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.MyHolder> {
 
                 }
             }.start();
+        }
+    }
+
+    class LoadingHolder extends RecyclerView.ViewHolder {
+        public LoadingHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }

@@ -16,48 +16,61 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class NumberAdapter extends RecyclerView.Adapter<NumberAdapter.ViewHoder> {
+public class NumberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    ArrayList<Number> list;
+    public static final int TYPE_NUMBER = 1;
     numberCallBack callBack;
+    public static final int TYPE_LOADING = 2;
+    ArrayList<Number> listNum;
 
     public NumberAdapter(Context context, ArrayList<Number> list) {
         this.context = context;
-        this.list = list;
+        this.listNum = list;
         callBack = (numberCallBack) context;
     }
 
     public void setList(ArrayList<Number> list) {
-        this.list = list;
+        this.listNum = list;
         notifyDataSetChanged();
     }
 
-    @NonNull
+
     @NotNull
     @Override
-    public ViewHoder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new ViewHoder(LayoutInflater.from(context).inflate(R.layout.item_number, parent, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        if (viewType == TYPE_LOADING) {
+            return new LoadingHolder(LayoutInflater.from(context).inflate(R.layout.item_loading, parent, false));
+        } else {
+            return new ItemHolder(LayoutInflater.from(context).inflate(R.layout.item_number, parent, false));
+        }
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull NumberAdapter.ViewHoder holder, int position) {
-        Number number = list.get(position);
-        holder.binData(number);
+    public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof ItemHolder) {
+            ((ItemHolder) holder).binData(listNum.get(position));
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return listNum.get(position) == null ? TYPE_LOADING : TYPE_NUMBER;
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return listNum.size();
     }
 
     public interface numberCallBack {
         void onClickNumber(int pos);
     }
 
-    class ViewHoder extends RecyclerView.ViewHolder {
+    class ItemHolder extends RecyclerView.ViewHolder {
         TextView tvNumber;
 
-        public ViewHoder(@NonNull @NotNull View itemView) {
+        public ItemHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             tvNumber = itemView.findViewById(R.id.tvNumber);
             tvNumber.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +85,12 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberAdapter.ViewHoder>
 
         public void binData(Number num) {
             tvNumber.setText(num.getNumber() + "");
+        }
+    }
+
+    class LoadingHolder extends RecyclerView.ViewHolder {
+        public LoadingHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }
