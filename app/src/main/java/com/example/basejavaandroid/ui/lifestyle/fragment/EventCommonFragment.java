@@ -78,7 +78,7 @@ public class EventCommonFragment extends BaseFragment<FragEventCommonBinding, Ev
         binding.swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                binding.swiperefresh.setEnabled(false);
+                binding.swiperefresh.setRefreshing(false);
                 viewmodel.doLoadFilm();
             }
         });
@@ -99,7 +99,7 @@ public class EventCommonFragment extends BaseFragment<FragEventCommonBinding, Ev
 
             @Override
             public void onClickFilmPos(int pos) {
-                Toast.makeText(getActivity(), "Click film:" + viewmodel.listFilm.get(pos), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Click film:" + viewmodel.arrFilm.get(pos), Toast.LENGTH_SHORT).show();
             }
         });
         binding.rvFilms.setHasFixedSize(true);
