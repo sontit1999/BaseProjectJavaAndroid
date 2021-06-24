@@ -4,6 +4,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -47,7 +48,7 @@ public class FilmsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (viewType == TYPE_FILMS) {
             return new MyHolder(DataBindingUtil.inflate(layoutInflater, R.layout.item_film, parent, false));
         } else {
-            return new LoadingHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false));
+            return new LoadingHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_viewmore, parent, false));
         }
 
     }
@@ -56,6 +57,9 @@ public class FilmsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyHolder) {
             ((MyHolder) holder).binData(listFilm.get(position));
+        }
+        if (holder instanceof LoadingHolder) {
+
         }
     }
 
@@ -128,8 +132,16 @@ public class FilmsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     class LoadingHolder extends RecyclerView.ViewHolder {
+        TextView tvViewmore;
         public LoadingHolder(@NonNull View itemView) {
             super(itemView);
+            tvViewmore = itemView.findViewById(R.id.tvViewMore);
+
+            tvViewmore.setOnClickListener(v -> {
+                if (callback != null) {
+                    callback.onViewMore();
+                }
+            });
         }
     }
 }

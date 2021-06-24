@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,8 +15,6 @@ import com.example.basejavaandroid.R;
 import com.example.basejavaandroid.adapter.FilmsAdapter;
 import com.example.basejavaandroid.base.BaseFragment;
 import com.example.basejavaandroid.databinding.FragEventCommonBinding;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -101,11 +98,20 @@ public class EventCommonFragment extends BaseFragment<FragEventCommonBinding, Ev
             public void onClickFilmPos(int pos) {
                 Toast.makeText(getActivity(), "Click film:" + viewmodel.arrFilm.get(pos), Toast.LENGTH_SHORT).show();
             }
+
+            @Override
+            public void onViewMore() {
+                if (!viewmodel.isloadMore) {
+                    viewmodel.isloadMore = true;
+                    viewmodel.loadMoreFilm();
+                }
+
+            }
         });
         binding.rvFilms.setHasFixedSize(true);
         binding.rvFilms.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         binding.rvFilms.setAdapter(filmsAdapter);
-        binding.rvFilms.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*binding.rvFilms.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -118,7 +124,7 @@ public class EventCommonFragment extends BaseFragment<FragEventCommonBinding, Ev
                 }
 
             }
-        });
+        });*/
 
     }
 

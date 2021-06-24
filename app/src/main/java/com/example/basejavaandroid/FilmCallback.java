@@ -7,4 +7,6 @@ public interface FilmCallback extends BaseCBAdapter {
     void onLongClick(Film film);
 
     void onClickFilmPos(int pos);
+
+    void onViewMore();
 }

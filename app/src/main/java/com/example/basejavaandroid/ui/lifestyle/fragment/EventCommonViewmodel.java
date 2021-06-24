@@ -56,6 +56,7 @@ public class EventCommonViewmodel extends BaseViewmodel {
                 list.add(new Film(5, "Cô Gái Trẻ Hứa Hẹn - Promising Young Woman", "https://lh3.googleusercontent.com/proxy/xvlZV6hnejy2d_eLrT1m7tVMErfANW4rcfuXDdzRTcvOTNo9oOyNQ0n4aqxe1Gj0QuByhLLnevilkvhrux-evLz-x3IlQADl46uG_u-oE1O1fJTCaTD9A2YAf3MjepOq-CLKrg", 2.5f, "Trước vụ việc người bạn thân nhất Nina Fisher bị tấn công tình dục và rồi tự sát vì không tìm thấy công lý, Cassandra Cassie Thomas đã gặp phải tổn thương tâm lý nặng nề và bỏ học. Giờ đây, Cassie 30 tuổi lang thang giữa các hộp đêm Ohio, đóng giả làm một “con mồi béo bở” đang say khướt để mời gọi và dạy dỗ những chàng trai ngây ngô hư hỏng.", "2021-06-09T15:00:00-0700"));
                 list.add(new Film(6, "Kiều", "https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/4/7/1614643553076225740302655401821542371023678n-1617813417946909536602.jpg", 3, "Bộ phim dựa trên tác phẩm văn học kinh điển cùng tên của đại thi hào Nguyễn Du. Chỉ khi vừa tung ra đoạn trailer ngắn, Kiều đã khiến không ít khán giả phải tò mò và mong chờ. Liệu Kiều trên màn ảnh có thu hút được khán giả không? Mời bạn cùng ra rạp để có được câu trả lời chính xác nhất", "2021-06-10T15:00:00-0700"));
                 arrFilm.addAll(list);
+                arrFilm.add(null);
                 actionState.setValue(new ActionFilms.DataChange());
                 // ẩn loading và set cho phép loadmore
                 isLoading.setValue(false);
@@ -100,6 +101,7 @@ public class EventCommonViewmodel extends BaseViewmodel {
                 list.add(new Film(6, "Kiều", "https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/4/7/1614643553076225740302655401821542371023678n-1617813417946909536602.jpg", 3, "Bộ phim dựa trên tác phẩm văn học kinh điển cùng tên của đại thi hào Nguyễn Du. Chỉ khi vừa tung ra đoạn trailer ngắn, Kiều đã khiến không ít khán giả phải tò mò và mong chờ. Liệu Kiều trên màn ảnh có thu hút được khán giả không? Mời bạn cùng ra rạp để có được câu trả lời chính xác nhất", "07:00:05 12/05/2021"));
 
                 arrFilm.addAll(list);
+                arrFilm.add(null);
                 actionState.setValue(new ActionFilms.DataChange());
 
                 // set cho phép loadmore tiếp
