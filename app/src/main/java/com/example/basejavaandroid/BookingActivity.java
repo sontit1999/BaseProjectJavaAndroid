@@ -5,15 +5,18 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.example.basejavaandroid.base.BaseActivity;
+import com.example.basejavaandroid.customview.CongratulationDialog;
 import com.example.basejavaandroid.databinding.ActivityBookingBinding;
 
 public class BookingActivity extends BaseActivity<ActivityBookingBinding,BookingActViewmodel> {
     BookingFragment bookingFragment ;
     FragDemo fragDemo ;
     Film film;
+    public static final String PARAM_NAME_VOUCHER = "PARAM_NAME_VOUCHER";
     @Override
     protected void getData() {
         Intent intent = getIntent();
@@ -30,8 +33,7 @@ public class BookingActivity extends BaseActivity<ActivityBookingBinding,Booking
 
     @Override
     protected void initEvent() {
-          loadFragment(bookingFragment,R.id.containerFrame);
-
+         binding.button2.setOnClickListener(v -> showDialogCheckInCongratulation("ahihi"));
     }
 
     @Override
@@ -60,5 +62,10 @@ public class BookingActivity extends BaseActivity<ActivityBookingBinding,Booking
         } else {
             finish();
         }
+    }
+    public void showDialogCheckInCongratulation(String eventName) {
+        CongratulationDialog congratulationDialog = new CongratulationDialog(this);
+        congratulationDialog.setCancelable(false);
+        congratulationDialog.show();
     }
 }

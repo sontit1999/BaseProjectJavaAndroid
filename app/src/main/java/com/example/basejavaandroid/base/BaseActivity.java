@@ -4,13 +4,16 @@ import android.app.Activity;
 
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -27,8 +30,11 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.basejavaandroid.BookingActivity;
 import com.example.basejavaandroid.R;
+import com.example.basejavaandroid.customview.CongratulationDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -39,6 +45,13 @@ public abstract class BaseActivity<B extends ViewDataBinding,VM extends BaseView
     protected B binding;
     protected VM viewmodel;
     public ProgressDialog mProgressDialog;
+    private BroadcastReceiver broadcastReviewReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("sondz","show dialog");
+            showDialogCheckInCongratulation(intent.getStringExtra(BookingActivity.PARAM_NAME_VOUCHER));
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +61,20 @@ public abstract class BaseActivity<B extends ViewDataBinding,VM extends BaseView
         setBindingViewmodel();
         getData();
         initEvent();
+        registerBroadcastReview();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unRegisterBroadcastReview();
+    }
+    public void showDialogCheckInCongratulation(String eventName) {
+        CongratulationDialog congratulationDialog = new CongratulationDialog(this);
+        congratulationDialog.setContent("Congratulations","You are in the Top 10 reviewers in November, You have been rewarded a Voucher Name " + eventName  + ". You can find it on List e-voucher / My voucher.","");
+        congratulationDialog.setCancelable(false);
+        congratulationDialog.show();
+    }
     protected abstract void getData();
 
     protected abstract void initEvent();
@@ -158,5 +183,12 @@ public abstract class BaseActivity<B extends ViewDataBinding,VM extends BaseView
 
         if (activity.getCurrentFocus() != null && activity.getCurrentFocus().getWindowToken() != null)
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+    public void registerBroadcastReview(){
+        IntentFilter intentFilter = new IntentFilter(Constant.ACTION_SHOW_DIALOG_REVIEW);
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReviewReceiver,intentFilter);
+    }
+    public void unRegisterBroadcastReview(){
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReviewReceiver);
     }
 }

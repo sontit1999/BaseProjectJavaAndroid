@@ -14,10 +14,14 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ProcessLifecycleOwner;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.basejavaandroid.BookingActivity;
 import com.example.basejavaandroid.MainActivity;
 import com.example.basejavaandroid.R;
+import com.example.basejavaandroid.base.Constant;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -46,6 +50,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String messageBody) {
+        if(isAppVisible()){
+            Intent intent = new Intent(Constant.ACTION_SHOW_DIALOG_REVIEW);
+            intent.putExtra(BookingActivity.PARAM_NAME_VOUCHER,"Voucher mĩ phẩm");
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+            return;
+        }
         Intent intent = new Intent(this, BookingActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -86,6 +96,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         notificationManager.notify(0, notificationBuilder.build());
+    }
+    boolean isAppVisible() {
+        return ProcessLifecycleOwner
+                .get()
+                .getLifecycle()
+                .getCurrentState()
+                .isAtLeast(Lifecycle.State.STARTED);
     }
 }
 
