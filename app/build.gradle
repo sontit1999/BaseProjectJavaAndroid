@@ -15,7 +15,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -56,4 +56,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    implementation 'com.android.volley:volley:1.2.0'
+    implementation 'org.jsoup:jsoup:1.7.3'
+    implementation 'com.android.support:multidex:1.0.3'
 }

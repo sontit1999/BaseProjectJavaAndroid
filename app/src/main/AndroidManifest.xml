@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.basejavaandroid">
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -8,15 +9,24 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
+        android:name=".base.network.BaseApplication"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BaseJavaAndroid">
-        <activity android:name=".ui.firebasemessage.FirebaseNotfiActivity">
+        android:theme="@style/Theme.BaseJavaAndroid"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:name,android:theme,android:icon,android:allowBackup">
+        <activity android:name=".ui.mrcong.DetailIdolActivity"></activity>
+        <activity android:name=".ui.mrcong.MrCongActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".ui.firebasemessage.FirebaseNotfiActivity" />
         <activity android:name=".ui.mallclub.addreview.AddReivewActivity">
 
             <!--
@@ -28,7 +38,7 @@
             -->
         </activity>
         <activity android:name=".ui.lifestyle.keepstate.KeepStateTabActivity" />
-        <activity android:name=".ui.mallclub.HomeFanClubActivity"></activity>
+        <activity android:name=".ui.mallclub.HomeFanClubActivity" />
         <activity android:name=".ui.lifestyle.loadmore.LoadmoreTestActivity">
 
             <!--
@@ -42,30 +52,35 @@
         <activity android:name=".TestProfileCollapsingActivity" />
         <activity android:name=".ui.MyProfileHelthActivity" />
         <activity android:name=".ui.lifestyle.EventLongBienActivity">
-           <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity android:name=".ui.HelthProfileActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.BmiHistoryActivity" />
         <activity android:name=".ui.BmiActivity" />
         <activity android:name=".ui.BmiResultActivity" />
         <activity android:name=".ui.BmiCaculateActivity" />
-        <activity android:name=".BookingActivity" >
-            <!--<intent-filter>
+        <activity android:name=".BookingActivity">
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity android:name=".CustomActivity" />
         <activity android:name=".DetailActivity" />
