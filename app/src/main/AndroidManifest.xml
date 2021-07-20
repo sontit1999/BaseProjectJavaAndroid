@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <application
         android:name=".base.network.BaseApplication"
@@ -20,11 +23,7 @@
         tools:replace="android:name,android:theme,android:icon,android:allowBackup">
         <activity android:name=".ui.mrcong.DetailIdolActivity"></activity>
         <activity android:name=".ui.mrcong.MrCongActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.firebasemessage.FirebaseNotfiActivity" />
         <activity android:name=".ui.mallclub.addreview.AddReivewActivity">
@@ -38,7 +37,13 @@
             -->
         </activity>
         <activity android:name=".ui.lifestyle.keepstate.KeepStateTabActivity" />
-        <activity android:name=".ui.mallclub.HomeFanClubActivity" />
+        <activity android:name=".ui.mallclub.HomeFanClubActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.lifestyle.loadmore.LoadmoreTestActivity">
 
             <!--
@@ -50,7 +55,9 @@
             -->
         </activity>
         <activity android:name=".TestProfileCollapsingActivity" />
-        <activity android:name=".ui.MyProfileHelthActivity" />
+        <activity android:name=".ui.MyProfileHelthActivity">
+
+        </activity>
         <activity android:name=".ui.lifestyle.EventLongBienActivity">
 
             <!--

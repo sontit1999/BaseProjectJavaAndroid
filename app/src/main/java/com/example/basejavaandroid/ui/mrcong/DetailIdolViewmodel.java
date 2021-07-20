@@ -1,7 +1,8 @@
 package com.example.basejavaandroid.ui.mrcong;
 
 import android.util.Log;
-import android.widget.Toast;
+
+import androidx.lifecycle.MutableLiveData;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,64 +23,107 @@ import java.util.ArrayList;
 public class DetailIdolViewmodel extends BaseViewmodel {
     String linkIdol;
     ArrayList<String> arrLinkPhoto = new ArrayList<>();
+    MutableLiveData<ActionDetailIdol> actionState = new MutableLiveData<>();
     int currentPage = 1;
-    int MAX_PAGE = 500;
-    public void init(String linkIdol){
+    int MAX_PAGE = 10;
+    boolean isLoading = true;
+
+    public void init(String linkIdol) {
         this.linkIdol = linkIdol;
         getPhotoIdol();
     }
-    public void getPhotoIdol(){
+
+    public void getPhotoIdol() {
+        currentPage = 1;
         RequestQueue requestQueue = Volley.newRequestQueue(BaseApplication.getContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,linkIdol, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, linkIdol, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("doc",response.toString());
+                Log.d("doc", response);
                 String linkthumbail;
                 Document document = Jsoup.parse(response);
                 Elements items = document.select(".entry p img");
                 ArrayList<String> arrPhoto = new ArrayList<>();
-                for (Element i : items)
-                {
+                for (Element i : items) {
                     linkthumbail = i.attr("src");
                     arrPhoto.add(linkthumbail);
+                    Log.d("sondz", linkthumbail);
                 }
                 arrLinkPhoto.addAll(arrPhoto);
+                actionState.setValue(new ActionDetailIdol.ActionDataChange());
+                isLoading = false;
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        actionState.setValue(new ActionDetailIdol.ActionLoadFail(error.getMessage()));
                     }
                 }
         );
         requestQueue.add(stringRequest);
     }
-    public void getMorePhotoIdol(){
+
+    public void getMorePhotoIdol() {
+        currentPage++;
+        if (currentPage > MAX_PAGE) {
+            actionState.setValue(new ActionDetailIdol.ActionAllDataLoaded());
+            return;
+        }
         RequestQueue requestQueue = Volley.newRequestQueue(BaseApplication.getContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,linkIdol, new Response.Listener<String>() {
+        String urlPage = linkIdol + currentPage + "/";
+        Log.d("loadmore page: ", urlPage);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlPage, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("doc",response.toString());
+                Log.d("doc", response);
                 String linkthumbail;
                 Document document = Jsoup.parse(response);
                 Elements items = document.select(".entry p img");
                 ArrayList<String> arrPhoto = new ArrayList<>();
-                for (Element i : items)
-                {
+                for (Element i : items) {
                     linkthumbail = i.attr("src");
                     arrPhoto.add(linkthumbail);
+                    Log.d("sondz", linkthumbail);
                 }
                 arrLinkPhoto.addAll(arrPhoto);
+                actionState.setValue(new ActionDetailIdol.ActionLoadMoreComplete(arrPhoto.size()));
+                isLoading = false;
             }
         },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        actionState.setValue(new ActionDetailIdol.ActionLoadFail(error.getMessage()));
                     }
                 }
         );
         requestQueue.add(stringRequest);
+    }
+
+    static class ActionDetailIdol {
+        static class ActionDataChange extends ActionDetailIdol {
+
+        }
+
+        static class ActionAllDataLoaded extends ActionDetailIdol {
+
+        }
+
+        static class ActionLoadMoreComplete extends ActionDetailIdol {
+            int count;
+
+            public ActionLoadMoreComplete(int count) {
+                this.count = count;
+            }
+        }
+
+        static class ActionLoadFail extends ActionDetailIdol {
+            String message;
+
+            public ActionLoadFail(String message) {
+                this.message = message;
+            }
+        }
     }
 }

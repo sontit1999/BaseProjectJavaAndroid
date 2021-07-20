@@ -1,5 +1,6 @@
 package com.example.basejavaandroid.ui.mallclub;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.example.basejavaandroid.base.BaseActivity;
 import com.example.basejavaandroid.databinding.ActivityHomeFanClubBinding;
 import com.example.basejavaandroid.ui.lifestyle.fragment.ViewPagerAdapter;
 import com.example.basejavaandroid.ui.mallclub.fragment.ReviewFragment;
+import com.example.basejavaandroid.ui.mrcong.MrCongActivity;
 
 public class HomeFanClubActivity extends BaseActivity<ActivityHomeFanClubBinding, FanClubViewmodel> {
     ViewPagerAdapter viewPagerAdapter;
@@ -35,6 +37,12 @@ public class HomeFanClubActivity extends BaseActivity<ActivityHomeFanClubBinding
                 binding.viewpagerReview.setCurrentItem(0, false);
                 binding.tvReview.setTextColor(Color.WHITE);
                 binding.tvMyReview.setTextColor(Color.BLACK);
+            }
+        });
+        binding.ivHand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeFanClubActivity.this, MrCongActivity.class));
             }
         });
     }

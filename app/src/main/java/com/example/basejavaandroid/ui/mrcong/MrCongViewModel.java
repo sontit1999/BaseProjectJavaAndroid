@@ -2,8 +2,6 @@ package com.example.basejavaandroid.ui.mrcong;
 
 import android.util.Log;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,7 +37,6 @@ public class MrCongViewModel extends BaseViewmodel {
     }
     public void getIdol(){
         currentPage = 1;
-
         RequestQueue requestQueue = Volley.newRequestQueue(BaseApplication.getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.BASE_URL + currentPage, new Response.Listener<String>() {
             @Override
@@ -63,14 +60,47 @@ public class MrCongViewModel extends BaseViewmodel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("sondz",error.getMessage());
+                actionState.setValue(new ActionIdol.ActionLoadFail(error.getMessage()));
             }
         });
         requestQueue.add(stringRequest);
-    };
-    public void getMoreIdol(){
+    }
+
+    public void getIdolSpecificPage(int page) {
+        currentPage = page;
+        RequestQueue requestQueue = Volley.newRequestQueue(BaseApplication.getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.BASE_URL + currentPage, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String linkidol, linkthumbail, nameidol;
+                Document document = Jsoup.parse(response);
+                Elements items = document.select(".item-list");
+                ArrayList<Idol> arrIdols = new ArrayList<>();
+                for (Element i : items) {
+                    linkidol = i.select(".post-thumbnail a").attr("href");
+                    linkthumbail = i.select(".post-thumbnail a img").attr("src");
+                    nameidol = i.select("h2 a").text();
+                    Idol idol = new Idol(nameidol, linkthumbail, linkidol);
+                    arrIdol.add(idol);
+                    Log.d("Idol", nameidol + "-" + linkthumbail + "-" + linkidol);
+                }
+                arrIdol.addAll(arrIdols);
+                actionState.setValue(new ActionIdol.ActionDataChange());
+                isLoading = false;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                actionState.setValue(new ActionIdol.ActionLoadFail(error.getMessage()));
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
+
+    public void getMoreIdol() {
         currentPage++;
-        if(currentPage>MAX_PAGE){
+        if (currentPage > MAX_PAGE) {
+            actionState.setValue(new ActionIdol.ActionAllDataLoaded());
             return;
         }
         RequestQueue requestQueue = Volley.newRequestQueue(BaseApplication.getContext());
@@ -90,20 +120,41 @@ public class MrCongViewModel extends BaseViewmodel {
                     Log.d("Idol", nameidol + "-" + linkthumbail + "-" + linkidol);
                 }
                 arrIdol.addAll(arrIdols);
-                actionState.setValue(new ActionIdol.ActionDataChange());
+                actionState.setValue(new ActionIdol.ActionLoadMoreComplete(arrIdols.size()));
                 isLoading = false;
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("sondz",error.getMessage());
+                actionState.setValue(new ActionIdol.ActionLoadFail(error.getMessage()));
             }
         });
         requestQueue.add(stringRequest);
     }
-    static class ActionIdol{
-        static class ActionDataChange extends ActionIdol{
 
+    static class ActionIdol {
+        static class ActionDataChange extends ActionIdol {
+
+        }
+
+        static class ActionAllDataLoaded extends ActionIdol {
+
+        }
+
+        static class ActionLoadMoreComplete extends ActionIdol {
+            int count;
+
+            public ActionLoadMoreComplete(int count) {
+                this.count = count;
+            }
+        }
+
+        static class ActionLoadFail extends ActionIdol {
+            String message;
+
+            public ActionLoadFail(String message) {
+                this.message = message;
+            }
         }
     }
 }

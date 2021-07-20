@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
-
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class ImageSlideAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        ImageView imageView = new ImageView(context);
+        PhotoView imageView = new PhotoView(context);
         Glide.with(context).load(listImage.get(position)).into(imageView);
         container.addView(imageView, 0);
         return imageView;
